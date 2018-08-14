@@ -200,7 +200,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808141611352_InitialCreate.cs" />
+    <Compile Include="Migrations\201808141611352_InitialCreate.Designer.cs">
+      <DependentUpon>201808141611352_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808141625535_Add table tblUserProfiles.cs" />
+    <Compile Include="Migrations\201808141625535_Add table tblUserProfiles.Designer.cs">
+      <DependentUpon>201808141625535_Add table tblUserProfiles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Entities\UserProfile.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -281,6 +291,14 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201808141611352_InitialCreate.resx">
+      <DependentUpon>201808141611352_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808141625535_Add table tblUserProfiles.resx">
+      <DependentUpon>201808141625535_Add table tblUserProfiles.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

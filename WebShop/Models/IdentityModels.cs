@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using WebShop.Models.Entities;
 
 namespace WebShop.Models
 {
@@ -31,6 +32,7 @@ namespace WebShop.Models
         {
             return new ApplicationDbContext();
         }
+        public DbSet<UserProfile> UserProfiles { get; set; }
     }
 
     public class CustomUserRole : IdentityUserRole<int> { }
