@@ -4,25 +4,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebShop.DAL.Abstract;
 using WebShop.Models;
 
 namespace WebShop.Controllers
 {
     public class HomeController : Controller
     {
-        public HomeController()
+        private readonly IUserService _userService;
+        public HomeController(IUserService userService)
         {
+            _userService = userService;
         }
-        public ApplicationDbContext MyDbContext
-        {
-            get
-            {
-                return HttpContext.GetOwinContext().Get<ApplicationDbContext>();
-            }
-        }
+        //public ApplicationDbContext MyDbContext
+        //{
+        //    get
+        //    {
+        //        return HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+        //    }
+        //}
         public ActionResult Index()
         {
-            int countUsers=MyDbContext.Users.Count();
+            int mycount = _userService.GetCountUsers();
             return View();
         }
 
