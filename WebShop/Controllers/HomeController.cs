@@ -1,15 +1,28 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebShop.Models;
 
 namespace WebShop.Controllers
 {
     public class HomeController : Controller
     {
+        public HomeController()
+        {
+        }
+        public ApplicationDbContext MyDbContext
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Get<ApplicationDbContext>();
+            }
+        }
         public ActionResult Index()
         {
+            int countUsers=MyDbContext.Users.Count();
             return View();
         }
 
