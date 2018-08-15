@@ -9,5 +9,6 @@ namespace WebShop.DAL.Abstract
     public interface IUserService
     {
         int GetCountUsers();
+        int AddRole(string name);
     }
 }
