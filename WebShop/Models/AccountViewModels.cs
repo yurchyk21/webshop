@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Web;
 
 namespace WebShop.Models
 {
@@ -83,7 +84,7 @@ namespace WebShop.Models
         [Display(Name = "Телефон")]
         public string Phone { get; set; }
         [Display(Name = "Фото")]
-        public string Image { get; set; }
+        public HttpPostedFileBase Image { get; set; }
         [Required]
         [Display(Name = "Дата народження")]
         public string DateOfBirth { get; set; }

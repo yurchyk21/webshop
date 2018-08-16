@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
@@ -152,6 +153,11 @@ namespace WebShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (model.Image != null)
+                {
+                    string fileName = Guid.NewGuid()+".jpg";
+                    model.Image.SaveAs(Server.MapPath(ConfigurationManager.AppSettings["ImageUserPath"] + fileName));
+                }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)

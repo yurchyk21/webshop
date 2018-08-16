@@ -25,7 +25,7 @@ namespace WebShop.Controllers
         //}
         public ActionResult Index()
         {
-            int mycount = _userService.GetCountUsers();
+            //int mycount = _userService.GetCountUsers();
             ViewBag.RoleId = _userService.AddRole("Admin");
             return View();
         }
