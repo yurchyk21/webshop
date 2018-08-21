@@ -84,7 +84,7 @@ namespace WebShop.Models
         [Display(Name = "Телефон")]
         public string Phone { get; set; }
         [Display(Name = "Фото")]
-        public HttpPostedFileBase Image { get; set; }
+        public string Image { get; set; }
         [Required]
         [Display(Name = "Дата народження")]
         public string DateOfBirth { get; set; }

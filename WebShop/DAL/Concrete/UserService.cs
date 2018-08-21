@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using WebShop.DAL.Abstract;
 using WebShop.Models;
+using WebShop.Models.Entities;
 
 namespace WebShop.DAL.Concrete
 {
@@ -30,6 +31,13 @@ namespace WebShop.DAL.Concrete
             if (result.Succeeded)
                 return role.Id;
             return 0;
+        }
+
+        public int AddUserProfiles(UserProfile userProfile)
+        {
+            _context.UserProfiles.Add(userProfile);
+            _context.SaveChanges();
+            return userProfile.Id;
         }
 
         public int GetCountUsers()

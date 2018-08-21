@@ -1,15 +1,21 @@
 ﻿using System;
 using System.Configuration;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using WebShop.DAL.Abstract;
 using WebShop.Models;
+using WebShop.Models.Entities;
 using static WebShop.Controllers.ManageController;
 
 namespace WebShop.Controllers
@@ -19,15 +25,19 @@ namespace WebShop.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private IUserService _userService;
+     
         //public AccountController()
         //{
         //}
-  
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+
+        public AccountController(ApplicationUserManager userManager, 
+            ApplicationSignInManager signInManager, 
+            IUserService userService)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _userService = userService;
         }
 
         public ApplicationSignInManager SignInManager
@@ -153,26 +163,71 @@ namespace WebShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (model.Image != null)
-                {
-                    string fileName = Guid.NewGuid()+".jpg";
-                    model.Image.SaveAs(Server.MapPath(ConfigurationManager.AppSettings["ImageUserPath"] + fileName));
-                }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
-                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                //if (model.Image != null)
+                //{
+                //    string fileName = Guid.NewGuid()+".jpg";
+                //    model.Image.SaveAs(Server.MapPath(ConfigurationManager.AppSettings["ImageUserPath"] + fileName));
+                //}
+                try
+                {
+                    using (TransactionScope scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+                    {
+                        var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                        var result = await UserManager.CreateAsync(user, model.Password);
+
+                        if (result.Succeeded)
+                        {
+                            // The Complete method commits the transaction. If an exception has been thrown,
+                            // Complete is not  called and the transaction is rolled back.
+                            string base64image = model.Image.Split(',')[1];
+                            Bitmap imgCropped = base64image.FromBase64StringToBitmap();
+                            string path = Server.MapPath(ConfigurationManager.AppSettings["ImageUserPath"]);
+                            string filename = Guid.NewGuid().ToString() + ".jpg";
+                            imgCropped.Save(path + filename, ImageFormat.Jpeg);
+
+                            UserProfile userProfile = new UserProfile
+                            {
+                                Id = user.Id,
+                                Image = "test",
+                                DateOfBirth = null,
+                                Phone = model.Phone
+                            };
+                            _userService.AddUserProfiles(userProfile);
+                            //throw new Exception("Bad");
+
+
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                            // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+                            // Send an email with this link
+                            // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                            // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                            // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                            
+                            // The Complete method commits the transaction. If an exception has been thrown,
+                            // Complete is not  called and the transaction is rolled back.
+                            scope.Complete();
+                            return RedirectToAction("Index", "Home");
+                        }
+                        AddErrors(result);
+                    }
                 }
-                AddErrors(result);
+                catch (TransactionAbortedException ex)
+                {
+                    Debug.WriteLine("TransactionAbortedException Message: {0}", ex.Message);
+                    ModelState.AddModelError("", string.Format("TransactionAbortedException Message: {0}", ex.Message));
+                }
+                catch (ApplicationException ex)
+                {
+                    Debug.WriteLine("ApplicationException Message: {0}", ex.Message);
+                    ModelState.AddModelError("", string.Format("ApplicationException Message: {0}", ex.Message));
+                }
+                catch(Exception ex)
+                {
+                    Debug.WriteLine("Exception Message: {0}", ex.Message);
+                    ModelState.AddModelError("", string.Format("Exception Message: {0}", ex.Message));
+                }
             }
 
             // If we got this far, something failed, redisplay form
