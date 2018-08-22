@@ -14,6 +14,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using WebShop.DAL.Abstract;
+using WebShop.Healpers;
 using WebShop.Models;
 using WebShop.Models.Entities;
 using static WebShop.Controllers.ManageController;
@@ -181,16 +182,25 @@ namespace WebShop.Controllers
                         {
                             // The Complete method commits the transaction. If an exception has been thrown,
                             // Complete is not  called and the transaction is rolled back.
-                            string base64image = model.ImageBase64.Split(',')[1];
+                            string base64image = model.ImageBase64;
                             Bitmap imgCropped = base64image.FromBase64StringToBitmap();
+                            var saveImage=ImageWorker.CreateImage(imgCropped, 300, 300);
+                            if (saveImage == null)
+                                throw new Exception("Error save image");
+
                             string path = Server.MapPath(ConfigurationManager.AppSettings["ImageUserPath"]);
                             string filename = Guid.NewGuid().ToString() + ".jpg";
-                            imgCropped.Save(path + filename, ImageFormat.Jpeg);
+                            saveImage.Save(path + filename, ImageFormat.Jpeg);
 
+                            var saveImageIcon = ImageWorker.CreateImage(imgCropped, 32, 32);
+                            if (saveImageIcon == null)
+                                throw new Exception("Error save image");
+                            saveImageIcon.Save(path + "32_"+filename, ImageFormat.Jpeg);
+                            
                             UserProfile userProfile = new UserProfile
                             {
                                 Id = user.Id,
-                                Image = "test",
+                                Image = filename,
                                 DateOfBirth = null,
                                 Phone = model.Phone
                             };

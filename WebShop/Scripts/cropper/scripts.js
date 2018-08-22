@@ -71,7 +71,7 @@ $(function () {
                         context.canvas.width = img.width;
                         context.canvas.height = img.height;
 
-                        if (img.width < 480 && img.height<620) {
+                        if (img.width <= 300 && img.height<=300) {
                             alert("Ображення менше 300 пікселів")
                             return;
                         }
@@ -83,7 +83,7 @@ $(function () {
 
                         context.drawImage(img, 0, 0);
                         var cropper = $canvas.cropper('destroy').cropper({
-                            aspectRatio: 3 / 4,
+                            aspectRatio: 1 / 1,
                             viewMode: 1,
                             dragMode: 'move',
                             preview: '.img-preview',
@@ -94,7 +94,7 @@ $(function () {
                                 var data = e.detail;
                                 var h = Math.round(data.height);
                                 var w = Math.round(data.width);
-                                if (w < 300) {
+                                if (w <= 300) {
                                     this.cropper.setData({ width: 300 });
                                 }
                                 //else
@@ -109,7 +109,7 @@ $(function () {
                     console.log(croppedImage);
                     //Зображення обрізане записуємо у скрите поле на формі
                     $("#imgSelectView").attr("src", croppedImage);
-                    $('#ImageBase64').attr("value", croppedImage);
+                    $('#ImageBase64').attr("value", croppedImage.split(',')[1]);
                     cropperClose();
                 });
 
