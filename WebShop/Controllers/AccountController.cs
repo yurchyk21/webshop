@@ -21,6 +21,7 @@ using static WebShop.Controllers.ManageController;
 namespace WebShop.Controllers
 {
     [Authorize]
+    
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -180,7 +181,7 @@ namespace WebShop.Controllers
                         {
                             // The Complete method commits the transaction. If an exception has been thrown,
                             // Complete is not  called and the transaction is rolled back.
-                            string base64image = model.Image.Split(',')[1];
+                            string base64image = model.ImageBase64.Split(',')[1];
                             Bitmap imgCropped = base64image.FromBase64StringToBitmap();
                             string path = Server.MapPath(ConfigurationManager.AppSettings["ImageUserPath"]);
                             string filename = Guid.NewGuid().ToString() + ".jpg";

@@ -84,7 +84,7 @@ namespace WebShop.Models
         [Display(Name = "Телефон")]
         public string Phone { get; set; }
         [Display(Name = "Фото")]
-        public string Image { get; set; }
+        public string ImageBase64 { get; set; }
         [Required]
         [Display(Name = "Дата народження")]
         public string DateOfBirth { get; set; }

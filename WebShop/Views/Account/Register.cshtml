@@ -4,13 +4,20 @@
     string path = Url.Content(System.Configuration.ConfigurationManager.AppSettings["ImageUserPath"]);
 }
 
+@section styles {
+    <link href="~/Content/cropper/cropper.min.css" rel="stylesheet" />
+    <link href="~/Content/cropper/main.css" rel="stylesheet" />
+}
+
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data", role = "form" }))
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
+
     <h4>Create a new account.</h4>
     <hr />
+    @Html.HiddenFor(model => model.ImageBase64)
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
@@ -47,7 +54,7 @@
             <img src="@(path+"300_300_default.png")" alt="Зображення" width="100%" />
         </div>
         <div class="col-md-4">
-            <input type="file" name="Image" class="filestyle" />
+            <input type="file" name="img_file" id="img_file" class="filestyle" />
             @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })*@
         </div>
     </div>
@@ -58,10 +65,14 @@
     </div>
 }
 
+@Html.Partial("_ImageCropper")
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 
     <script src="~/Scripts/bootstrap-filestyle.min.js"></script>
+    <script src="~/Scripts/cropper/cropper.min.js"></script>
+    <script src="~/Scripts/cropper/scripts.js"></script>
     <script>
         $('.filestyle').filestyle({
             buttonText: 'Обрати фото',
