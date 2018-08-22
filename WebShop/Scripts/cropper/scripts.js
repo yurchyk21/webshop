@@ -108,6 +108,7 @@ $(function () {
                     $('#result').html($('<img>').attr('src', croppedImage));
                     console.log(croppedImage);
                     //Зображення обрізане записуємо у скрите поле на формі
+                    $("#imgSelectView").attr("src", croppedImage);
                     $('#ImageBase64').attr("value", croppedImage);
                     cropperClose();
                 });
