@@ -32,7 +32,13 @@ namespace WebShop.Models
         {
             return new ApplicationDbContext();
         }
+        #region MyEntities
+
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
+
+        #endregion
     }
 
     public class CustomUserRole : IdentityUserRole<int> { }
