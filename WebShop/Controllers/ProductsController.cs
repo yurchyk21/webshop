@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebShop.Models;
 using WebShop.Models.Entities;
+using WebShop.ViewModels;
 
 namespace WebShop.Controllers
 {
@@ -22,25 +23,41 @@ namespace WebShop.Controllers
         // GET: Products
         public ActionResult Index(string category, string search)
         {
+            //instantiate a new view model 
+            ProductIndexViewModel viewModel = new ProductIndexViewModel();
+
+
             var products = _context.Products.Include(p => p.Category);
 
-            if (!String.IsNullOrEmpty(category))
-            {
-                products = products.Where(p => p.Category.Name == category);
-            }
 
             if (!String.IsNullOrEmpty(search))
             {
                 products = products.Where(p => p.Name.Contains(search) ||
                 p.Description.Contains(search) ||
                 p.Category.Name.Contains(search));
-                ViewBag.Search = search;
+                viewModel.Search = search;
             }
+            //group search results into categories and count how many items in each category 
+            viewModel.CatsWithCount = from matchingProducts in products
+                               where matchingProducts.CategoryId != null
+                               group matchingProducts by
+                               matchingProducts.Category.Name into
+                               catGroup
+                               select new CategoryWithCount()
+                               {
+                                  CategoryName = catGroup.Key,
+                                  ProductCount = catGroup.Count()
+                               };
 
-            var categories = products.OrderBy(p => p.Category.Name).Select(p => p.Category.Name).Distinct();
-            ViewBag.Category = new SelectList(categories);
 
-            return View(products.ToList());
+            if (!String.IsNullOrEmpty(category))
+            {
+                products = products.Where(p => p.Category.Name == category);
+            }
+            
+            viewModel.Products = products;
+
+            return View(viewModel);
         }
 
         // GET: Products/Details/5

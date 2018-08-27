@@ -231,6 +231,14 @@
     <Compile Include="Migrations\201808231625426_Add tblProducts and tblCategories.Designer.cs">
       <DependentUpon>201808231625426_Add tblProducts and tblCategories.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808271724134_CategoryNameValidation.cs" />
+    <Compile Include="Migrations\201808271724134_CategoryNameValidation.Designer.cs">
+      <DependentUpon>201808271724134_CategoryNameValidation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808271731158_ProductValidtion.cs" />
+    <Compile Include="Migrations\201808271731158_ProductValidtion.Designer.cs">
+      <DependentUpon>201808271731158_ProductValidtion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entities\Category.cs" />
@@ -357,6 +365,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808231625426_Add tblProducts and tblCategories.resx">
       <DependentUpon>201808231625426_Add tblProducts and tblCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808271724134_CategoryNameValidation.resx">
+      <DependentUpon>201808271724134_CategoryNameValidation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808271731158_ProductValidtion.resx">
+      <DependentUpon>201808271731158_ProductValidtion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

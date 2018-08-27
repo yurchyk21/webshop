@@ -3,6 +3,12 @@
 
 App_Data/
 
+#################
+##UploadedFiles
+
+UploadedFiles/
+
+
 ## Node
 #################
 

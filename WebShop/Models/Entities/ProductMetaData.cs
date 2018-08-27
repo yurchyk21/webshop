@@ -14,6 +14,6 @@ namespace WebShop.Models.Entities
     public class ProductMetaData
     {
         [Display(Name = "Product Name")]
-        public string Name;
+       public string Name;
     }
 }

@@ -114,7 +114,12 @@ namespace WebShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+
             Category category = _context.Categories.Find(id);
+            foreach(var p in category.Products)
+            {
+                p.CategoryId = null;
+            }
             _context.Categories.Remove(category);
             _context.SaveChanges();
             return RedirectToAction("Index");
