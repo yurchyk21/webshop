@@ -20,13 +20,26 @@ namespace WebShop.Controllers
         }
 
         // GET: Products
-        public ActionResult Index(string category)
+        public ActionResult Index(string category, string search)
         {
             var products = _context.Products.Include(p => p.Category);
+
             if (!String.IsNullOrEmpty(category))
             {
                 products = products.Where(p => p.Category.Name == category);
             }
+
+            if (!String.IsNullOrEmpty(search))
+            {
+                products = products.Where(p => p.Name.Contains(search) ||
+                p.Description.Contains(search) ||
+                p.Category.Name.Contains(search));
+                ViewBag.Search = search;
+            }
+
+            var categories = products.OrderBy(p => p.Category.Name).Select(p => p.Category.Name).Distinct();
+            ViewBag.Category = new SelectList(categories);
+
             return View(products.ToList());
         }
 
