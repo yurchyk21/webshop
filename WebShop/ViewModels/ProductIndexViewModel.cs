@@ -4,12 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebShop.Models.Entities;
+using PagedList;
 
 namespace WebShop.ViewModels
 {
     public class ProductIndexViewModel
     {
-        public IQueryable<Product> Products { get; set; }
+        public IPagedList<Product> Products { get; set; }
         public string Search { get; set; }
         public IEnumerable<CategoryWithCount> CatsWithCount { get; set; }
         public string Category { get; set; }
