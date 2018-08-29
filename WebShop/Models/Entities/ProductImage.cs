@@ -7,13 +7,14 @@ using System.Web;
 
 namespace WebShop.Models.Entities
 {
-    [Table("tblProductImage")]
+    [Table("tblProductImages")]
     public class ProductImage
     {
         [Key]
         public int Id { get; set; }
         [Display(Name = "File")]
         [Required, StringLength(maximumLength:255)]
+        [Index(IsUnique = true)]
         public string FileName { get; set; }
     }
 }

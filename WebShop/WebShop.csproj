@@ -216,6 +216,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductImagesController.cs" />
@@ -250,6 +251,10 @@
     <Compile Include="Migrations\201808281744232_ProductImages.cs" />
     <Compile Include="Migrations\201808281744232_ProductImages.Designer.cs">
       <DependentUpon>201808281744232_ProductImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201808291605064_Update products images.cs" />
+    <Compile Include="Migrations\201808291605064_Update products images.Designer.cs">
+      <DependentUpon>201808291605064_Update products images.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -358,9 +363,11 @@
     <Content Include="Views\ProductImages\Details.cshtml" />
     <Content Include="Views\ProductImages\Edit.cshtml" />
     <Content Include="Views\ProductImages\Index.cshtml" />
+    <Content Include="Views\Error\FileUploadLimitExceeded.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\ProductImages\Thumbnails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -393,6 +400,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808281744232_ProductImages.resx">
       <DependentUpon>201808281744232_ProductImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808291605064_Update products images.resx">
+      <DependentUpon>201808291605064_Update products images.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

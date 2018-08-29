@@ -2,12 +2,16 @@
 
 @{
     ViewBag.Title = "Index";
+    string path = Url.Content(WebShop.Constants.ProductThumbnailPath);
 }
 
 <h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Upload")
+</p>
+<p>
+    @Html.ActionLink("Add images", "Add",null, new { @class="btn btn-success" })
 </p>
 <table class="table">
     <tr>
@@ -20,7 +24,8 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.FileName)
+            <img src="@(path+item.FileName)">
+            @*@Html.DisplayFor(modelItem => item.FileName)*@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
