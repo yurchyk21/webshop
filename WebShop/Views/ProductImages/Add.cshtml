@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Add";
+    string path = Url.Content(WebShop.Constants.ProductImagePath);
+}
+@section styles {
+    <link href="~/Content/cropper/cropper.min.css" rel="stylesheet" />
+    <link href="~/Content/cropper/main.css" rel="stylesheet" />
+}
+<h2>Add</h2>
+<input type="file" name="img_file" id="img_file" class="filestyle" />
+
+
+<div class="row">
+    <div class="col-md-2 plusupload" id="containerimage1">
+        <div class="thumbnail">
+            
+                <img src="@(path+"_default.png")" class="uploadimage" alt="Lights" style="width:100%">
+                <div class="caption">
+                    <p>Add New Image</p>
+                </div>
+        </div>
+    </div>
+
+</div>
+@using (Html.BeginForm("Add", "ProductImages", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.Hidden("ImageBase64")
+    <div class="form-group">
+
+        <div class="col-md-4">
+
+            @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })*@
+        </div>
+    </div>
+}
+
+@Html.Partial("_ImageCropper")
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/bootstrap-filestyle.min.js"></script>
+    <script src="~/Scripts/cropper/cropper.min.js"></script>
+    <script src="~/Scripts/product/cropper/scripts.js"></script>
+    <script>
+        var CounterImages = 1;
+        $('.filestyle').filestyle({
+            buttonText: 'Обрати фото',
+            buttonName: 'btn-primary'
+        });
+    </script>
+    <script>
+        $(function () {
+            $(document).on('click', '.plusupload', function () {
+                $('#img_file').click();
+                return false;
+            });
+        });
+    </script>
+}
+
+
+

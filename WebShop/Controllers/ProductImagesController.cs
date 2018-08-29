@@ -236,5 +236,9 @@ namespace WebShop.Controllers
             }
             img.Save(Constants.ProductThumbnailPath + file.FileName);
         }
+        public ActionResult Add()
+        {
+            return View();
+        }
     }
 }
