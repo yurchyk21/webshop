@@ -14,11 +14,11 @@
 <div class="row">
     <div class="col-md-2 plusupload" id="containerimage1">
         <div class="thumbnail">
-            
-                <img src="@(path+"_default.png")" class="uploadimage" alt="Lights" style="width:100%">
-                <div class="caption">
-                    <p>Add New Image</p>
-                </div>
+
+            <img src="@(path+"_default.png")" class="uploadimage" alt="Lights" style="width:100%">
+            <div class="caption">
+                <p>Add New Image</p>
+            </div>
         </div>
     </div>
 
@@ -26,13 +26,6 @@
 @using (Html.BeginForm("Add", "ProductImages", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.Hidden("ImageBase64")
-    <div class="form-group">
-
-        <div class="col-md-4">
-
-            @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })*@
-        </div>
-    </div>
 }
 
 @Html.Partial("_ImageCropper")

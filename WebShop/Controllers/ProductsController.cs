@@ -1,4 +1,5 @@
-﻿using PagedList;
+﻿using Newtonsoft.Json;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -182,13 +183,29 @@ namespace WebShop.Controllers
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
+        [HttpGet]
+        public ContentResult SearchByNameJson(string name)
         {
-            if (disposing)
+
+            var products = _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.Name.Contains(name) ||
+                p.Description.Contains(name) ||
+                p.Category.Name.Contains(name))
+                .Select(p=>new ProductSearchViewModel
+                {
+                    Id=p.Id,
+                    Name=p.Name,
+                    CategoryName=p.Category.Name
+                }).ToList();
+
+
+            string json = JsonConvert.SerializeObject(new
             {
-                _context.Dispose();
-            }
-            base.Dispose(disposing);
+                products
+            });
+
+            return Content(json, "application/json");
         }
     }
 }

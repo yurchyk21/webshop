@@ -278,6 +278,7 @@
     <Content Include="Content\cropper\cropper.css" />
     <Content Include="Content\cropper\cropper.min.css" />
     <Content Include="Content\cropper\main.css" />
+    <Content Include="Content\custom\autoCompleteData.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\PagedList.css" />

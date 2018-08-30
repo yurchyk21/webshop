@@ -20,6 +20,12 @@ namespace WebShop
             );
 
             routes.MapRoute(
+                name: "ProductSearchAutocomplete",
+                url: "Products/SearchAutocomplete/{name}",
+                defaults: new { controller = "Products", action = "SearchByNameJson" }
+            );
+
+            routes.MapRoute(
                 name: "ProductsbyCategorybyPage",
                 url: "Products/{category}/Page{page}",
                 defaults: new { controller = "Products", action = "Index" }
@@ -31,11 +37,7 @@ namespace WebShop
                 defaults: new { controller = "Products", action = "Index" }
             );
 
-            routes.MapRoute(
-                name: "ProductsbyCategory",
-                url: "Products/{category}",
-                defaults: new { controller = "Products", action = "Index" }
-            );
+            
 
             routes.MapRoute(
                 name: "ProductsIndex",
