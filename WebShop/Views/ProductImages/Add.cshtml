@@ -7,18 +7,17 @@
     <link href="~/Content/cropper/cropper.min.css" rel="stylesheet" />
     <link href="~/Content/cropper/main.css" rel="stylesheet" />
 }
-<h2>Add</h2>
-<input type="file" name="img_file" id="img_file" class="filestyle" />
+<h2>Загрузка фоток на сайт</h2>
+<input type="file" name="img_file" id="img_file" class="hide"/>
 
 
-<div class="row">
+<div class="row" id="listUploadImages">
+
     <div class="col-md-2 plusupload" id="containerimage1">
         <div class="thumbnail">
 
             <img src="@(path+"_default.png")" class="uploadimage" alt="Lights" style="width:100%">
-            <div class="caption">
-                <p>Add New Image</p>
-            </div>
+            <div class="caption"><p>Add New Image</p></div>
         </div>
     </div>
 
@@ -36,14 +35,10 @@
     <script src="~/Scripts/bootstrap-filestyle.min.js"></script>
     <script src="~/Scripts/cropper/cropper.min.js"></script>
     <script src="~/Scripts/product/cropper/scripts.js"></script>
+
     <script>
         var CounterImages = 1;
-        $('.filestyle').filestyle({
-            buttonText: 'Обрати фото',
-            buttonName: 'btn-primary'
-        });
-    </script>
-    <script>
+        var PathImage = "@(path+"_default.png")";
         $(function () {
             $(document).on('click', '.plusupload', function () {
                 $('#img_file').click();

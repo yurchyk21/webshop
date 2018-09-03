@@ -1,4 +1,5 @@
 $(function () {
+    var dataCrop = false;
     var $canvas = $("#canvas"),
         context = $canvas.get(0).getContext('2d');
     $("#dragModeMove").on("click", function () {
@@ -59,7 +60,6 @@ $(function () {
     }
 
 
-
     $('#img_file').on('change', function () {
         if (this.files && this.files[0]) {
             if (this.files[0].type.match(/^image\//)) {
@@ -71,15 +71,16 @@ $(function () {
                         context.canvas.width = img.width;
                         context.canvas.height = img.height;
 
-                        if (img.width <= 300 && img.height<=300) {
-                            alert("Ображення менше 300 пікселів")
+                        if (img.width <= 300 && img.height <= 300) {
+                            alert("Ображення менше 300 пікселів");
                             return;
                         }
                         //Показуємо діалог
-                        
+
                         body.classList.toggle("open");
                         $(".containerCrop").show();
                         $(".navbar").hide();
+                        dataCrop = true;
 
                         context.drawImage(img, 0, 0);
                         var cropper = $canvas.cropper('destroy').cropper({
@@ -100,20 +101,35 @@ $(function () {
                                 //else
                             }
                         });
-                    }
+                    };
                     img.src = e.target.result;
                 };
                 $("#crop").click(function () {
-                    var croppedImage = $canvas.cropper('getCroppedCanvas').toDataURL('image/jpg');
-                    $('#result').html($('<img>').attr('src', croppedImage));
-                    console.log(croppedImage);
-                    //Зображення обрізане записуємо у скрите поле на формі
-                    var imageCurrent = "#containerimage" + CounterImages;
-                    var image = $(imageCurrent).find(".uploadimage")[0];
-                    image.src= croppedImage;
-                    //$("#imgSelectView").attr("src", croppedImage);
-                    $('#ImageBase64').attr("value", croppedImage.split(',')[1]);
-                    cropperClose();
+                    if (dataCrop) {
+                        var croppedImage = $canvas.cropper('getCroppedCanvas').toDataURL('image/jpg');
+                        $('#result').html($('<img>').attr('src', croppedImage));
+                        console.log(croppedImage);
+                        //Зображення обрізане записуємо у скрите поле на формі
+                        var imageCurrent = "#containerimage" + CounterImages;
+                        var image = $(imageCurrent).find(".uploadimage")[0];
+                        image.src = croppedImage;
+                        //$("#imgSelectView").attr("src", croppedImage);
+                        $('#ImageBase64').attr("value", croppedImage.split(',')[1]);
+                        //Завантажили одне фото на сайт
+                        CounterImages++;
+                        var itemAddImage = '';
+                        itemAddImage += '<div class="col-md-2 plusupload" id="containerimage'
+                            + CounterImages + '">';
+                        itemAddImage += '<div class="thumbnail">';
+                        itemAddImage += '<img src="' + PathImage + '" class="uploadimage" alt = "Lights" style = "width:100%" >';
+                        itemAddImage += '<div class="caption"><p>Add New Image</p></div>';
+                        itemAddImage += '</div>';
+                        itemAddImage += '</div>';
+
+                        $("#listUploadImages").append(itemAddImage);
+                        cropperClose();
+                        dataCrop = false;
+                    }
                 });
 
                 reader.readAsDataURL(this.files[0]);
