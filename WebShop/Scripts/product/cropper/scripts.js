@@ -1,9 +1,9 @@
 $(function () {
     var cropper = function () {
-        var self = this;
-
+        //Чи почали процес кропання малюнка
         var isCropped = false;
 
+        //Діалогове вікно для обрізки фото
         var dialog = {
             body: document.querySelector('body'),
             show: function () {
@@ -19,30 +19,38 @@ $(function () {
         };
 
         function init() {
-            initControls();
+            initButtonControls();
+            initEventBaseClick();
 
-            $("#cropperClose").on("click", function () {
-                dialog.hide();
-            });
-            $('#img_file').on('change', function () {
-                if (this.files && this.files[0]) {
-                    if (this.files[0].type.match(/^image\//)) {
-                        onLoad(this.files[0]);
+            //Базові кнопакі діалога
+            function initEventBaseClick() {
+                //Закрити діалог кропера
+                $("#cropperClose").on("click", function () {
+                    dialog.hide();
+                });
+                //Вибір нового малюнка
+                $('#img_file').on('change', function () {
+                    if (this.files && this.files[0]) {
+                        if (this.files[0].type.match(/^image\//)) {
+                            onLoad(this.files[0]);
+                        }
+                        else {
+                            alert("Invalid file type");
+                        }
                     }
                     else {
-                        alert("Invalid file type");
+                        alert("Please select a file.");
                     }
-                }
-                else {
-                    alert("Please select a file.");
-                }
 
-            });
-            $("#crop").click(function () {
-                cropped();
-            });
-            //private method
-            function initControls() {
+                });
+                //Обрізати фото натиснули
+                $("#crop").click(function () {
+                    cropped();
+                });
+            }
+
+            //Ініціалізація конопок самого кропера поворот
+            function initButtonControls() {
 
                 $("#dragModeMove").on("click", function () {
                     $('#canvas').cropper('setDragMode', 'move');
@@ -99,7 +107,7 @@ $(function () {
             init();
             isCropped = true;   
         }
-
+        //Загрузка малюнка в кропер
         function onLoad(fileImage) {
                 var $canvas = $("#canvas"),
                     context = $canvas.get(0).getContext('2d');
