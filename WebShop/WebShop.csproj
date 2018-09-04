@@ -369,6 +369,7 @@
     <Content Include="Views\Error\FileUploadLimitExceeded.cshtml" />
     <Content Include="Views\ProductImages\Add.cshtml" />
     <Content Include="Views\ProductImages\_ImageCropper.cshtml" />
+    <Content Include="Views\ProductImages\_ProgressLoader.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

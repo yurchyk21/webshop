@@ -2,7 +2,17 @@ $(function () {
     var cropper = function () {
         //Чи почали процес кропання малюнка
         var isCropped = false;
-
+        var $inputFileImage = $("#img_file");
+        var counterImages = 1;
+        var changeImage = 0;
+        var loader = {
+            show: function () {
+                $("#loading").show();
+            },
+            hide: function () {
+                $("#loading").hide();
+            }
+        };
         //Діалогове вікно для обрізки фото
         var dialog = {
             body: document.querySelector('body'),
@@ -29,7 +39,7 @@ $(function () {
                     dialog.hide();
                 });
                 //Вибір нового малюнка
-                $('#img_file').on('change', function () {
+                $inputFileImage.on('change', function () {
                     if (this.files && this.files[0]) {
                         if (this.files[0].type.match(/^image\//)) {
                             onLoad(this.files[0]);
@@ -46,6 +56,22 @@ $(function () {
                 //Обрізати фото натиснули
                 $("#crop").click(function () {
                     cropped();
+                });
+
+                $("#listUploadImages").on('click', '.plusupload', function () {
+                    changeImage = $(this).data("counter");
+                    $inputFileImage.click();
+                    return false;
+                });
+                $("#listUploadImages").on('click', '.icon-delete', function () {
+                    var item = $(this);
+                    var p = item.closest(".plusupload");
+                    console.log(changeImage = p.data("counter"));
+                    var id = "#containerimage" + p.data("counter");
+                    $(id).remove();
+                    return false;
+                    //$inputFileImage.click();
+                    //return false;
                 });
             }
 
@@ -105,70 +131,91 @@ $(function () {
 
         function crop() {
             init();
-            isCropped = true;   
+            isCropped = true;
         }
         //Загрузка малюнка в кропер
         function onLoad(fileImage) {
-                var $canvas = $("#canvas"),
-                    context = $canvas.get(0).getContext('2d');
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    var img = new Image();
-                    img.onload = function () {
-                        context.canvas.width = img.width;
-                        context.canvas.height = img.height;
+            var $canvas = $("#canvas"),
+                context = $canvas.get(0).getContext('2d');
+            //Включити -----------
+            loader.show();
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                //Виключити ---------
+                var img = new Image();
+                img.onload = function () {
 
-                        if (img.width <= 300 && img.height <= 300) {
-                            alert("Ображення менше 300 пікселів");
-                            return;
-                        }
-                        //Показуємо діалог
-                        dialog.show();
-                        isCropped = true;
+                    loader.hide();
+                    context.canvas.width = img.width;
+                    context.canvas.height = img.height;
 
-                        context.drawImage(img, 0, 0);
-                        var cropper = $canvas.cropper('destroy').cropper({
-                            aspectRatio: 1 / 1,
-                            viewMode: 1,
-                            dragMode: 'move',
-                            preview: '.img-preview',
-                            //autoCropArea: 0.00000001,
-                            //aspectRatio: 2,
-                            //,
-                            crop: function (e) {
-                                var data = e.detail;
-                                var h = Math.round(data.height);
-                                var w = Math.round(data.width);
-                                if (w <= 300) {
-                                    this.cropper.setData({ width: 300 });
-                                }
-                                //else
+                    if (img.width <= 300 && img.height <= 300) {
+                        alert("Ображення менше 300 пікселів");
+                        return;
+                    }
+                    //Показуємо діалог
+                    dialog.show();
+                    isCropped = true;
+
+                    context.drawImage(img, 0, 0);
+                    var cropper = $canvas.cropper('destroy').cropper({
+                        aspectRatio: 1 / 1,
+                        viewMode: 1,
+                        dragMode: 'move',
+                        preview: '.img-preview',
+                        //autoCropArea: 0.00000001,
+                        //aspectRatio: 2,
+                        //,
+                        crop: function (e) {
+                            var data = e.detail;
+                            var h = Math.round(data.height);
+                            var w = Math.round(data.width);
+                            if (w <= 300) {
+                                this.cropper.setData({ width: 300 });
                             }
-                        });
-                    };
-                    img.src = e.target.result;
+                            //else
+                        }
+                    });
                 };
-                reader.readAsDataURL(fileImage);
+                img.src = e.target.result;
             };
-        
+            reader.readAsDataURL(fileImage);
+        }
+
         function cropped() {
             if (isCropped) {
                 var $canvas = $("#canvas");
                 var croppedImage = $canvas.cropper('getCroppedCanvas').toDataURL('image/jpg');
                 $('#result').html($('<img>').attr('src', croppedImage));
+
+
                 //console.log(croppedImage);
                 //Зображення обрізане записуємо у скрите поле на формі
-                var imageCurrent = "#containerimage" + CounterImages;
+                var imageCurrent = "#containerimage" + counterImages;
                 var image = $(imageCurrent).find(".uploadimage")[0];
+
+                if (changeImage !== counterImages) {
+                    imageCurrent = "#containerimage" + changeImage;
+                    image = $(imageCurrent).find(".uploadimage")[0];
+                    image.src = croppedImage;
+                    dialog.hide();
+                    //$inputFileImage.replaceWith($inputFileImage.val('').clone(true));
+                    isCropped = false;
+                    return;
+                }
+
                 image.src = croppedImage;
                 //$("#imgSelectView").attr("src", croppedImage);
                 $('#ImageBase64').attr("value", croppedImage.split(',')[1]);
+
+                $('#del' + counterImages).show();
                 //Завантажили одне фото на сайт
-                CounterImages++;
+                counterImages++;
                 var itemAddImage = '';
                 itemAddImage += '<div class="col-md-2 plusupload" id="containerimage'
-                    + CounterImages + '">';
+                    + counterImages + '"  data-counter="' + counterImages + '">';
                 itemAddImage += '<div class="thumbnail">';
+                itemAddImage += '<i class="fa fa-times fa-2x icon-delete" aria-hidden="true" id="del' + counterImages + '"></i>';
                 itemAddImage += '<img src="' + PathImage + '" class="uploadimage" alt = "Lights" style = "width:100%" >';
                 itemAddImage += '<div class="caption"><p>Add New Image</p></div>';
                 itemAddImage += '</div>';
@@ -176,6 +223,7 @@ $(function () {
 
                 $("#listUploadImages").append(itemAddImage);
                 dialog.hide();
+                //$inputFileImage.replaceWith($inputFileImage.val('').clone(true));
                 isCropped = false;
             }
         }

@@ -49,3 +49,23 @@
     margin-right: 0;
     width: 2rem;
 }
+
+.centered {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /*margin-top: -100px;*/
+    /*margin-left: -100px;*/
+}
+
+.icon-big {
+    font-size: 82pt;
+ }
+
+.icon-delete {
+    cursor: pointer;
+    display: none;
+    color: red;
+    float:right;
+}
