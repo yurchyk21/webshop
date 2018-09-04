@@ -1,7 +1,9 @@
 $(function () {
     var cropper = function () {
         var self = this;
+
         var isCropped = false;
+
         var dialog = {
             body: document.querySelector('body'),
             show: function () {
@@ -19,7 +21,9 @@ $(function () {
         function init() {
             initControls();
 
-            $("#cropperClose").on("click", dialog.hide());
+            $("#cropperClose").on("click", function () {
+                dialog.hide();
+            });
             $('#img_file').on('change', function () {
                 if (this.files && this.files[0]) {
                     if (this.files[0].type.match(/^image\//)) {
