@@ -57,7 +57,7 @@ $(function () {
                 $("#crop").click(function () {
                     cropped();
                 });
-
+                //Натиснути на плюс або фотку
                 $("#listUploadImages").on('click', '.plusupload', function () {
                     changeImage = $(this).data("counter");
                     $inputFileImage.click();
@@ -70,8 +70,6 @@ $(function () {
                     var id = "#containerimage" + p.data("counter");
                     $(id).remove();
                     return false;
-                    //$inputFileImage.click();
-                    //return false;
                 });
             }
 
@@ -131,7 +129,6 @@ $(function () {
 
         function crop() {
             init();
-            isCropped = true;
         }
         //Загрузка малюнка в кропер
         function onLoad(fileImage) {
@@ -187,8 +184,6 @@ $(function () {
                 var $canvas = $("#canvas");
                 var croppedImage = $canvas.cropper('getCroppedCanvas').toDataURL('image/jpg');
                 $('#result').html($('<img>').attr('src', croppedImage));
-
-
                 //console.log(croppedImage);
                 //Зображення обрізане записуємо у скрите поле на формі
                 var imageCurrent = "#containerimage" + counterImages;

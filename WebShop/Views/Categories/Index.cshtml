@@ -17,17 +17,63 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.Name, "Index", "Products", new { category = item.Name }, null)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.Name, "Index", "Products", new { category = item.Name }, null)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", null, new { @class = "deleteCategory", data_id = item.Id })
+            </td>
+        </tr>
+    }
 
 </table>
+@section scripts {
+    <script src="~/Scripts/bootbox.min.js"></script>
+    <script>
+        window.onload = function () {
+            jQueryRelease();
+            //JavaScriptRelease();
+        };
+        function jQueryRelease() {
+            $(".deleteCategory").on("click", function () {
+                var self = $(this);
+                //bootbox.alert(self.attr("data-id"));
+                bootbox.confirm({
+                    message: "Ви дійсно хочете видалити ''?",
+                    buttons: {
+                        confirm: {
+                            label: 'Да',
+                            className: 'btn-success'
+                        },
+                        cancel: {
+                            label: 'Ні',
+                            className: 'btn-danger'
+                        }
+                    },
+                    callback: function (result) {
+                        if (result)
+                            location.reload();
+                        console.log('Ваша відповідь ' + result);
+                    }
+                });
+
+                return false;
+            });
+        }
+        function JavaScriptRelease() {
+            var list = document.getElementsByClassName("deleteCategory");
+            for (var i = 0; i < list.length; i++) {
+                list[i].onclick = function () {
+                    var self = this;
+                    //bootbox.alert(self.dataset.id);
+                    return false;
+                };
+            }
+        }
+    </script>
+}
