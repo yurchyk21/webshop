@@ -27,9 +27,10 @@
     </div>
 
 </div>
-@using (Html.BeginForm("Add", "ProductImages", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("Add", "ProductImages", FormMethod.Post, new { id = "__AjaxAntiForgeryForm", @class = "form-horizontal", role = "form" }))
 {
     @Html.Hidden("ImageBase64")
+    @Html.AntiForgeryToken()
 }
 
 @Html.Partial("_ImageCropper")

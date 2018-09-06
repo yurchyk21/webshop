@@ -27,7 +27,37 @@ $(function () {
                 $(".navbar").show();
             }
         };
+        var server = {
+            sendImage: function (base64) {
+                var form = $('#__AjaxAntiForgeryForm');
+                var token = $('input[name="__RequestVerificationToken"]', form).val();
+                var imageCurrent = "#containerimage" + counterImages;
 
+                var image = $(imageCurrent).find(".uploadimage")[0];
+                $.ajax({
+                    url: "/ProductImages/UploadBase64",
+                    type: "POST",
+                    data: {
+                        __RequestVerificationToken: token,
+                        base64image: base64 
+                    },
+                    success: function (result) {
+                        if (changeImage !== counterImages) {
+                            imageCurrent = "#containerimage" + changeImage;
+                            image = $(imageCurrent).find(".uploadimage")[0];
+                            image.src = result.imagePath;
+                            dialog.hide();
+                            //$inputFileImage.replaceWith($inputFileImage.val('').clone(true));
+                            isCropped = false;
+                            return;
+                        }
+
+                        image.src = result.imagePath;
+                        //console.log();
+                    }
+                });
+            }
+        };
         function init() {
             initButtonControls();
             initEventBaseClick();
@@ -183,25 +213,13 @@ $(function () {
             if (isCropped) {
                 var $canvas = $("#canvas");
                 var croppedImage = $canvas.cropper('getCroppedCanvas').toDataURL('image/jpg');
-                $('#result').html($('<img>').attr('src', croppedImage));
+                server.sendImage(croppedImage.split(',')[1]);
+                //$('#result').html($('<img>').attr('src', croppedImage));
                 //console.log(croppedImage);
                 //Зображення обрізане записуємо у скрите поле на формі
-                var imageCurrent = "#containerimage" + counterImages;
-                var image = $(imageCurrent).find(".uploadimage")[0];
-
-                if (changeImage !== counterImages) {
-                    imageCurrent = "#containerimage" + changeImage;
-                    image = $(imageCurrent).find(".uploadimage")[0];
-                    image.src = croppedImage;
-                    dialog.hide();
-                    //$inputFileImage.replaceWith($inputFileImage.val('').clone(true));
-                    isCropped = false;
-                    return;
-                }
-
-                image.src = croppedImage;
+                
                 //$("#imgSelectView").attr("src", croppedImage);
-                $('#ImageBase64').attr("value", croppedImage.split(',')[1]);
+                //$('#ImageBase64').attr("value", croppedImage.split(',')[1]);
 
                 $('#del' + counterImages).show();
                 //Завантажили одне фото на сайт

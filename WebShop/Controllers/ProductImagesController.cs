@@ -1,14 +1,21 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
+using System.Transactions;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using WebShop.Healpers;
 using WebShop.Models;
 using WebShop.Models.Entities;
 
@@ -239,6 +246,52 @@ namespace WebShop.Controllers
         public ActionResult Add()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ContentResult UploadBase64(string base64image)
+        {
+            string filename = Guid.NewGuid().ToString() + ".jpg";
+            string imageBig = Server.MapPath(Constants.ProductImagePath) + filename;
+            string imageSmall = Server.MapPath(Constants.ProductThumbnailPath) + filename;
+            string json = null;
+            try
+            {
+                // The Complete method commits the transaction. If an exception has been thrown,
+                // Complete is not  called and the transaction is rolled back.
+                Bitmap imgCropped = base64image.FromBase64StringToBitmap();
+                var saveImage = ImageWorker.CreateImage(imgCropped, 300, 300);
+                if (saveImage == null)
+                    throw new Exception("Error save image");
+
+                saveImage.Save(imageBig, ImageFormat.Jpeg);
+
+                var saveImageIcon = ImageWorker.CreateImage(imgCropped, 32, 32);
+                if (saveImageIcon == null)
+                    throw new Exception("Error save image");
+                saveImageIcon.Save(imageSmall, ImageFormat.Jpeg);
+                json = JsonConvert.SerializeObject(new
+                {
+                    imagePath = Url.Content(Constants.ProductImagePath) + filename
+                });
+            }
+            catch (Exception)
+            {
+                json = JsonConvert.SerializeObject(new
+                {
+                    imagePath = ""
+                });
+                if(System.IO.File.Exists(imageSmall))
+                {
+                    System.IO.File.Delete(imageSmall);
+                }
+                if (System.IO.File.Exists(imageBig))
+                {
+                    System.IO.File.Delete(imageBig);
+                }
+            }
+            return Content(json, "application/json");
         }
     }
 }
