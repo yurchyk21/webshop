@@ -250,7 +250,7 @@ namespace WebShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ContentResult UploadBase64(string base64image)
+        public ContentResult UploadBase64(string base64image, int ?imageId)
         {
             string filename = Guid.NewGuid().ToString() + ".jpg";
             string imageBig = Server.MapPath(Constants.ProductImagePath) + filename;
@@ -271,10 +271,17 @@ namespace WebShop.Controllers
                 if (saveImageIcon == null)
                     throw new Exception("Error save image");
                 saveImageIcon.Save(imageSmall, ImageFormat.Jpeg);
+
+                var productImage = new ProductImage { FileName = filename };
+                _context.ProductImages.Add(productImage);
+                _context.SaveChanges();
+
                 json = JsonConvert.SerializeObject(new
                 {
-                    imagePath = Url.Content(Constants.ProductImagePath) + filename
+                    imagePath = Url.Content(Constants.ProductImagePath) + filename,
+                    id = productImage.Id
                 });
+
             }
             catch (Exception)
             {
@@ -293,5 +300,6 @@ namespace WebShop.Controllers
             }
             return Content(json, "application/json");
         }
+
     }
 }

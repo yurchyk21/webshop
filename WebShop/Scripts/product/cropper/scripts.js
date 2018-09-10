@@ -31,28 +31,30 @@ $(function () {
             sendImage: function (base64) {
                 var form = $('#__AjaxAntiForgeryForm');
                 var token = $('input[name="__RequestVerificationToken"]', form).val();
-                var imageCurrent = "#containerimage" + counterImages;
+                //var imageCurrent = "#imageContainerPlus" + counterImages;
 
-                var image = $(imageCurrent).find(".uploadimage")[0];
+                //var image = $(imageCurrent).find(".uploadimage")[0];
                 $.ajax({
                     url: "/ProductImages/UploadBase64",
                     type: "POST",
                     data: {
                         __RequestVerificationToken: token,
-                        base64image: base64 
+                        base64image: base64
                     },
                     success: function (result) {
-                        if (changeImage !== counterImages) {
-                            imageCurrent = "#containerimage" + changeImage;
-                            image = $(imageCurrent).find(".uploadimage")[0];
-                            image.src = result.imagePath;
-                            dialog.hide();
-                            //$inputFileImage.replaceWith($inputFileImage.val('').clone(true));
-                            isCropped = false;
-                            return;
-                        }
+                        
+                            var itemImage = '';
+                        itemImage += '<div class="col-md-2 uploadImage"  data-id="' + result.id + '">' +
+                            '<div class="thumbnail">' +
+                            '<i class="fa fa-times fa-2x icon-delete" aria-hidden="true"></i>' +
+                            '<img src="' + result.imagePath + '" class="uploadimage" alt = "Lights" style = "width:100%" >' +
+                            '<div class="caption"><p>Add New Image</p></div>'+
+                            '</div>'+
+                            '</div>';
+                        $("#listUploadImages").append(itemImage);
+                        //$("#imageContainerPlus").insertBefore(itemImage);
 
-                        image.src = result.imagePath;
+                        //image.src = result.imagePath;
                         //console.log();
                     }
                 });
@@ -88,8 +90,7 @@ $(function () {
                     cropped();
                 });
                 //Натиснути на плюс або фотку
-                $("#listUploadImages").on('click', '.plusupload', function () {
-                    changeImage = $(this).data("counter");
+                $("#imageContainerPlus").on('click', function () {
                     $inputFileImage.click();
                     return false;
                 });
@@ -97,7 +98,7 @@ $(function () {
                     var item = $(this);
                     var p = item.closest(".plusupload");
                     console.log(changeImage = p.data("counter"));
-                    var id = "#containerimage" + p.data("counter");
+                    var id = "#imageContainerPlus" + p.data("counter");
                     $(id).remove();
                     return false;
                 });
@@ -197,7 +198,7 @@ $(function () {
                             var data = e.detail;
                             var h = Math.round(data.height);
                             var w = Math.round(data.width);
-                            if (w <= 300) {
+                            if (w <= 300 && isCropped) {
                                 this.cropper.setData({ width: 300 });
                             }
                             //else
@@ -221,20 +222,23 @@ $(function () {
                 //$("#imgSelectView").attr("src", croppedImage);
                 //$('#ImageBase64').attr("value", croppedImage.split(',')[1]);
 
-                $('#del' + counterImages).show();
-                //Завантажили одне фото на сайт
-                counterImages++;
-                var itemAddImage = '';
-                itemAddImage += '<div class="col-md-2 plusupload" id="containerimage'
-                    + counterImages + '"  data-counter="' + counterImages + '">';
-                itemAddImage += '<div class="thumbnail">';
-                itemAddImage += '<i class="fa fa-times fa-2x icon-delete" aria-hidden="true" id="del' + counterImages + '"></i>';
-                itemAddImage += '<img src="' + PathImage + '" class="uploadimage" alt = "Lights" style = "width:100%" >';
-                itemAddImage += '<div class="caption"><p>Add New Image</p></div>';
-                itemAddImage += '</div>';
-                itemAddImage += '</div>';
+                //----------------------
+                //$('#del' + counterImages).show();
+                ////Завантажили одне фото на сайт
+                //counterImages++;
+                //var itemAddImage = '';
+                //itemAddImage += '<div class="col-md-2 plusupload" id="imageContainerPlus'
+                //    + counterImages + '"  data-counter="' + counterImages + '">';
+                //itemAddImage += '<div class="thumbnail">';
+                //itemAddImage += '<i class="fa fa-times fa-2x icon-delete" aria-hidden="true" id="del' + counterImages + '"></i>';
+                //itemAddImage += '<img src="' + PathImage + '" class="uploadimage" alt = "Lights" style = "width:100%" >';
+                //itemAddImage += '<div class="caption"><p>Add New Image</p></div>';
+                //itemAddImage += '</div>';
+                //itemAddImage += '</div>';
 
-                $("#listUploadImages").append(itemAddImage);
+                //$("#listUploadImages").append(itemAddImage);
+                //---------------------------
+
                 dialog.hide();
                 //$inputFileImage.replaceWith($inputFileImage.val('').clone(true));
                 isCropped = false;
