@@ -42,8 +42,7 @@ $(function () {
                         base64image: base64
                     },
                     success: function (result) {
-                        
-                            var itemImage = '';
+                        var itemImage = '';
                         itemImage += '<div class="col-md-2 uploadImage"  data-id="' + result.id + '">' +
                             '<div class="thumbnail">' +
                             '<i class="fa fa-times fa-2x icon-delete" aria-hidden="true"></i>' +
@@ -70,28 +69,40 @@ $(function () {
                 $("#cropperClose").on("click", function () {
                     dialog.hide();
                 });
-                //Вибір нового малюнка
-                $inputFileImage.on('change', function () {
-                    if (this.files && this.files[0]) {
-                        if (this.files[0].type.match(/^image\//)) {
-                            onLoad(this.files[0]);
-                        }
-                        else {
-                            alert("Invalid file type");
-                        }
-                    }
-                    else {
-                        alert("Please select a file.");
-                    }
-
-                });
+                
                 //Обрізати фото натиснули
                 $("#crop").click(function () {
                     cropped();
                 });
                 //Натиснути на плюс або фотку
                 $("#imageContainerPlus").on('click', function () {
-                    $inputFileImage.click();
+                    var inputFile = $('<input/>')
+                        .attr('type', 'file')
+                        .attr('name', 'img_file')
+                        .attr('id', 'img_file')
+                        .attr('class', 'hide');
+
+                    $("#fileUploadContainer").html("");
+
+                    $("#fileUploadContainer")
+                        .html(inputFile);
+                    inputFile.click();
+
+                    //Вибір нового малюнка
+                    inputFile.on('change', function () {
+                        if (this.files && this.files[0]) {
+                            if (this.files[0].type.match(/^image\//)) {
+                                onLoad(this.files[0]);
+                            }
+                            else {
+                                alert("Invalid file type");
+                            }
+                        }
+                        else {
+                            alert("Please select a file.");
+                        }
+
+                    });
                     return false;
                 });
                 $("#listUploadImages").on('click', '.icon-delete', function () {

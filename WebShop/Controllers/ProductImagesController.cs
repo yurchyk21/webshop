@@ -250,7 +250,7 @@ namespace WebShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ContentResult UploadBase64(string base64image, int ?imageId)
+        public ContentResult UploadBase64(string base64image)
         {
             string filename = Guid.NewGuid().ToString() + ".jpg";
             string imageBig = Server.MapPath(Constants.ProductImagePath) + filename;
