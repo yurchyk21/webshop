@@ -1,10 +1,7 @@
-$(function () {
+п»ї$(function () {
     var cropper = function () {
-        //Чи почали процес кропання малюнка
+        //Р§Рё РїРѕС‡Р°Р»Рё РїСЂРѕС†РµСЃ РєСЂРѕРїР°РЅРЅСЏ РјР°Р»СЋРЅРєР°
         var isCropped = false;
-        var $inputFileImage = $("#img_file");
-        var counterImages = 1;
-        var changeImage = 0;
         var loader = {
             show: function () {
                 $("#loading").show();
@@ -13,7 +10,7 @@ $(function () {
                 $("#loading").hide();
             }
         };
-        //Діалогове вікно для обрізки фото
+        //Р”С–Р°Р»РѕРіРѕРІРµ РІС–РєРЅРѕ РґР»СЏ РѕР±СЂС–Р·РєРё С„РѕС‚Рѕ
         var dialog = {
             body: document.querySelector('body'),
             show: function () {
@@ -27,6 +24,7 @@ $(function () {
                 $(".navbar").show();
             }
         };
+        //Р”С–Р°Р»РѕРіРѕРІРµ РІС–РєРЅРѕ РґР»СЏ РѕР±СЂС–Р·РєРё С„РѕС‚Рѕ
         var server = {
             sendImage: function (base64) {
                 var form = $('#__AjaxAntiForgeryForm');
@@ -47,8 +45,8 @@ $(function () {
                             '<div class="thumbnail">' +
                             '<i class="fa fa-times fa-2x icon-delete" aria-hidden="true"></i>' +
                             '<img src="' + result.imagePath + '" class="uploadimage" alt = "Lights" style = "width:100%" >' +
-                            '<div class="caption"><p>Add New Image</p></div>'+
-                            '</div>'+
+                            '<div class="caption"><p>Add New Image</p></div>' +
+                            '</div>' +
                             '</div>';
                         $("#listUploadImages").append(itemImage);
                         //$("#imageContainerPlus").insertBefore(itemImage);
@@ -73,32 +71,35 @@ $(function () {
                     },
                     success: function (result) {
                         if (result.success) {
-                            var divDelete=$("#listUploadImages")
+                            var divDelete = $("#listUploadImages")
                                 .find("[data-id='" + id + "']").first();
                             divDelete.remove();
                         }
-                       
-                        
+
+
                     }
                 });
             }
         };
+
         function init() {
             initButtonControls();
             initEventBaseClick();
 
-            //Базові кнопакі діалога
+            //Р‘Р°Р·РѕРІС– РєРЅРѕРїР°РєС– РґС–Р°Р»РѕРіР°
             function initEventBaseClick() {
-                //Закрити діалог кропера
+
+                //Р—Р°РєСЂРёС‚Рё РґС–Р°Р»РѕРі РєСЂРѕРїРµСЂР°
                 $("#cropperClose").on("click", function () {
                     dialog.hide();
                 });
-                
-                //Обрізати фото натиснули
+
+                //РћР±СЂС–Р·Р°С‚Рё С„РѕС‚Рѕ РЅР°С‚РёСЃРЅСѓР»Рё
                 $("#crop").click(function () {
                     cropped();
                 });
-                //Натиснути на плюс або фотку
+
+                //Р”РѕРґР°С”РјРѕ РЅРѕРІСѓ С„РѕС‚РєСѓ РЅР° СЃР°Р№С‚
                 $("#imageContainerPlus").on('click', function () {
                     var inputFile = $('<input/>')
                         .attr('type', 'file')
@@ -112,7 +113,7 @@ $(function () {
                         .html(inputFile);
                     inputFile.click();
 
-                    //Вибір нового малюнка
+                    //Р’РёР±С–СЂ РЅРѕРІРѕРіРѕ РјР°Р»СЋРЅРєР°
                     inputFile.on('change', function () {
                         if (this.files && this.files[0]) {
                             if (this.files[0].type.match(/^image\//)) {
@@ -130,18 +131,15 @@ $(function () {
                     return false;
                 });
 
+                //Р’РёРґР°Р»СЏС”РјРѕ С„РѕС‚Рѕ
                 $("#listUploadImages").on('click', '.icon-delete', function () {
-                    var item = $(this);
-                    var p = item.closest("[data-id], .plusupload");
-                    console.log(p.attr("data-id"));
-                    //var id = "#imageContainerPlus" + p.data("counter");
-                    p.remove();
-                    //$(id).remove();
-                    return false;
+                    var div = $(this).closest("[data-id], .plusupload");
+                    var id = div.attr("data-id");
+                    server.deleteImage(id);
                 });
             }
 
-            //Ініціалізація конопок самого кропера поворот
+            //Р†РЅС–С†С–Р°Р»С–Р·Р°С†С–СЏ РєРѕРЅРѕРїРѕРє СЃР°РјРѕРіРѕ РєСЂРѕРїРµСЂР° РїРѕРІРѕСЂРѕС‚
             function initButtonControls() {
 
                 $("#dragModeMove").on("click", function () {
@@ -195,18 +193,18 @@ $(function () {
             }
         }
 
-        function crop() {
+        function run() {
             init();
         }
-        //Загрузка малюнка в кропер
+        //Р—Р°РіСЂСѓР·РєР° РјР°Р»СЋРЅРєР° РІ РєСЂРѕРїРµСЂ
         function onLoad(fileImage) {
             var $canvas = $("#canvas"),
                 context = $canvas.get(0).getContext('2d');
-            //Включити -----------
+            //Р’РєР»СЋС‡РёС‚Рё -----------
             loader.show();
             var reader = new FileReader();
             reader.onload = function (e) {
-                //Виключити ---------
+                //Р’РёРєР»СЋС‡РёС‚Рё ---------
                 var img = new Image();
                 img.onload = function () {
 
@@ -215,10 +213,10 @@ $(function () {
                     context.canvas.height = img.height;
 
                     if (img.width <= 300 && img.height <= 300) {
-                        alert("Ображення менше 300 пікселів");
+                        alert("РћР±СЂР°Р¶РµРЅРЅСЏ РјРµРЅС€Рµ 300 РїС–РєСЃРµР»С–РІ");
                         return;
                     }
-                    //Показуємо діалог
+                    //РџРѕРєР°Р·СѓС”РјРѕ РґС–Р°Р»РѕРі
                     dialog.show();
                     isCropped = true;
 
@@ -252,37 +250,12 @@ $(function () {
                 var $canvas = $("#canvas");
                 var croppedImage = $canvas.cropper('getCroppedCanvas').toDataURL('image/jpg');
                 server.sendImage(croppedImage.split(',')[1]);
-                //$('#result').html($('<img>').attr('src', croppedImage));
-                //console.log(croppedImage);
-                //Зображення обрізане записуємо у скрите поле на формі
-                
-                //$("#imgSelectView").attr("src", croppedImage);
-                //$('#ImageBase64').attr("value", croppedImage.split(',')[1]);
-
-                //----------------------
-                //$('#del' + counterImages).show();
-                ////Завантажили одне фото на сайт
-                //counterImages++;
-                //var itemAddImage = '';
-                //itemAddImage += '<div class="col-md-2 plusupload" id="imageContainerPlus'
-                //    + counterImages + '"  data-counter="' + counterImages + '">';
-                //itemAddImage += '<div class="thumbnail">';
-                //itemAddImage += '<i class="fa fa-times fa-2x icon-delete" aria-hidden="true" id="del' + counterImages + '"></i>';
-                //itemAddImage += '<img src="' + PathImage + '" class="uploadimage" alt = "Lights" style = "width:100%" >';
-                //itemAddImage += '<div class="caption"><p>Add New Image</p></div>';
-                //itemAddImage += '</div>';
-                //itemAddImage += '</div>';
-
-                //$("#listUploadImages").append(itemAddImage);
-                //---------------------------
-
                 dialog.hide();
-                //$inputFileImage.replaceWith($inputFileImage.val('').clone(true));
                 isCropped = false;
             }
         }
-        return { crop: crop };
+        return { start: run };
     }();
 
-    cropper.crop();
+    cropper.start();
 });

@@ -32,7 +32,7 @@ namespace WebShop.Controllers
         // GET: ProductImages
         public ActionResult Index()
         {
-            return View(_context.ProductImages.ToList());
+            return View(_context.ProductImages.OrderBy(p=>p.Id).ToList());
         }
 
         // GET: ProductImages/Details/5
