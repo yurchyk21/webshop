@@ -300,6 +300,48 @@ namespace WebShop.Controllers
             }
             return Content(json, "application/json");
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ContentResult DeleteImageAjax(int id)
+        {
+            string json = JsonConvert.SerializeObject(new
+            {
+                success = false
+            });
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    ProductImage productImage = _context.ProductImages.Find(id);
+                    if (productImage != null)
+                    {
+                        string filename = productImage.FileName;
+                        _context.ProductImages.Remove(productImage);
+                        _context.SaveChanges();
+                        string imageBig = Server.MapPath(Constants.ProductImagePath) + filename;
+                        string imageSmall = Server.MapPath(Constants.ProductThumbnailPath) + filename;
+                        if (System.IO.File.Exists(imageSmall))
+                        {
+                            System.IO.File.Delete(imageSmall);
+                        }
+                        if (System.IO.File.Exists(imageBig))
+                        {
+                            System.IO.File.Delete(imageBig);
+                        }
+                        json = JsonConvert.SerializeObject(new
+                        {
+                            success = true
+                        });
+                    }
+                    // The Complete method commits the transaction. If an exception has been thrown,
+                    // Complete is not  called and the transaction is rolled back.
+                    scope.Complete();
+                }
+            }
+            catch
+            {
+            }
+            return Content(json, "application/json");
+        }
     }
 }

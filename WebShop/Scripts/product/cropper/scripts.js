@@ -57,6 +57,30 @@ $(function () {
                         //console.log();
                     }
                 });
+            },
+            deleteImage: function (id) {
+                var form = $('#__AjaxAntiForgeryForm');
+                var token = $('input[name="__RequestVerificationToken"]', form).val();
+                //var imageCurrent = "#imageContainerPlus" + counterImages;
+
+                //var image = $(imageCurrent).find(".uploadimage")[0];
+                $.ajax({
+                    url: "/ProductImages/DeleteImageAjax",
+                    type: "POST",
+                    data: {
+                        __RequestVerificationToken: token,
+                        id: id
+                    },
+                    success: function (result) {
+                        if (result.success) {
+                            var divDelete=$("#listUploadImages")
+                                .find("[data-id='" + id + "']").first();
+                            divDelete.remove();
+                        }
+                       
+                        
+                    }
+                });
             }
         };
         function init() {
@@ -105,12 +129,14 @@ $(function () {
                     });
                     return false;
                 });
+
                 $("#listUploadImages").on('click', '.icon-delete', function () {
                     var item = $(this);
-                    var p = item.closest(".plusupload");
-                    console.log(changeImage = p.data("counter"));
-                    var id = "#imageContainerPlus" + p.data("counter");
-                    $(id).remove();
+                    var p = item.closest("[data-id], .plusupload");
+                    console.log(p.attr("data-id"));
+                    //var id = "#imageContainerPlus" + p.data("counter");
+                    p.remove();
+                    //$(id).remove();
                     return false;
                 });
             }
