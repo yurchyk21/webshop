@@ -26,6 +26,9 @@ namespace WebShop
                       "~/Content/bootstrap.css",
                       "~/Content/font-awesome.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/Content/Accordeon").Include(
+                     "~/Content/Accordeon/accordeon.css"));
         }
     }
 }

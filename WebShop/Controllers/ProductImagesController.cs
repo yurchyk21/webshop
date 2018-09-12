@@ -213,8 +213,22 @@ namespace WebShop.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             ProductImage productImage = _context.ProductImages.Find(id);
-            _context.ProductImages.Remove(productImage);
-            _context.SaveChanges();
+            if (productImage != null)
+            {
+                string filename = productImage.FileName;
+                _context.ProductImages.Remove(productImage);
+                _context.SaveChanges();
+                string imageBig = Server.MapPath(Constants.ProductImagePath) + filename;
+                string imageSmall = Server.MapPath(Constants.ProductThumbnailPath) + filename;
+                if (System.IO.File.Exists(imageSmall))
+                {
+                    System.IO.File.Delete(imageSmall);
+                }
+                if (System.IO.File.Exists(imageBig))
+                {
+                    System.IO.File.Delete(imageBig);
+                }
+            }
             return RedirectToAction("Index");
         }
 

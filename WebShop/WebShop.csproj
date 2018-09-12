@@ -276,6 +276,7 @@
     <Compile Include="ViewModels\ProductIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Accordeon\accordeon.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -378,6 +379,7 @@
     <Content Include="Views\Shared\_ImageCropper.cshtml" />
     <Content Include="Views\Shared\_ProgressLoader.cshtml" />
     <Content Include="Views\Shared\_AddImages.cshtml" />
+    <Content Include="Views\Products\_Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

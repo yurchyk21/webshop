@@ -182,6 +182,22 @@ namespace WebShop.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ContentResult CreateAjax([Bind(Include = "Id,Name,Description,Price,CategoryId")] Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Products.Add(product);
+                _context.SaveChanges();
+            }
+            string json = JsonConvert.SerializeObject(new
+            {
+                product
+            });
+
+            return Content(json, "application/json");
+        }
 
         [HttpGet]
         public ContentResult SearchByNameJson(string name)
