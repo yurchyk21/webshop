@@ -1,9 +1,4 @@
-﻿
-@{
-    ViewBag.Title = "Add";
-    string path = Url.Content(WebShop.Constants.ProductImagePath);
-}
-@section styles {
+﻿@section styles {
     <link href="~/Content/cropper/cropper.min.css" rel="stylesheet" />
     <link href="~/Content/cropper/main.css" rel="stylesheet" />
     <style>
@@ -12,32 +7,8 @@
         }
     </style>
 }
-<h2>Загрузка фоток на сайт</h2>
-@*<input type="file" name="img_file" id="img_file" class="hide" />*@
 
-<div id="fileUploadContainer">
-
-</div>
-
-<div class="row">
-    <div id="listUploadImages">
-
-    </div>
-    <div class="col-md-2 plusupload" id="imageContainerPlus" data-counter="1">
-        <div class="thumbnail">
-            <img src="@(path+"_default.png")" class="uploadimage" alt="Lights" style="width:100%">
-        </div>
-    </div>
-
-</div>
-@using (Html.BeginForm("Add", "ProductImages", FormMethod.Post, new { id = "__AjaxAntiForgeryForm", @class = "form-horizontal", role = "form" }))
-{
-    @Html.Hidden("ImageBase64")
-    @Html.AntiForgeryToken()
-}
-
-@Html.Partial("_ImageCropper")
-@Html.Partial("_ProgressLoader")
+@Html.Partial("_AddImages")
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
@@ -47,11 +18,4 @@
     <script src="~/Scripts/product/cropper/work-cropper.js"></script>
     @*<script src="~/Scripts/product/cropper/scripts.js"></script>*@
 
-    <script>
-
-        var PathImage = "@(path+"_default.png")";
-    </script>
 }
-
-
-

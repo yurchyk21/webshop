@@ -16,5 +16,6 @@ namespace WebShop.Models.Entities
         [Required, StringLength(maximumLength:255)]
         [Index(IsUnique = true)]
         public string FileName { get; set; }
+        public virtual ICollection<ProductMappingImage> ProductMappingImages { get; set; }
     }
 }

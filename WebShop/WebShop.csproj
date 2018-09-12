@@ -256,10 +256,15 @@
     <Compile Include="Migrations\201808291605064_Update products images.Designer.cs">
       <DependentUpon>201808291605064_Update products images.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809121546283_image mapping product.cs" />
+    <Compile Include="Migrations\201809121546283_image mapping product.Designer.cs">
+      <DependentUpon>201809121546283_image mapping product.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\ProductImage.cs" />
+    <Compile Include="Models\Entities\ProductMappingImages.cs" />
     <Compile Include="Models\Entities\ProductMetaData.cs" />
     <Compile Include="Models\Entities\UserProfile.cs" />
     <Compile Include="Models\HealperModels.cs" />
@@ -370,8 +375,9 @@
     <Content Include="Views\ProductImages\Index.cshtml" />
     <Content Include="Views\Error\FileUploadLimitExceeded.cshtml" />
     <Content Include="Views\ProductImages\Add.cshtml" />
-    <Content Include="Views\ProductImages\_ImageCropper.cshtml" />
-    <Content Include="Views\ProductImages\_ProgressLoader.cshtml" />
+    <Content Include="Views\Shared\_ImageCropper.cshtml" />
+    <Content Include="Views\Shared\_ProgressLoader.cshtml" />
+    <Content Include="Views\Shared\_AddImages.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -411,6 +417,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201808291605064_Update products images.resx">
       <DependentUpon>201808291605064_Update products images.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809121546283_image mapping product.resx">
+      <DependentUpon>201809121546283_image mapping product.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
