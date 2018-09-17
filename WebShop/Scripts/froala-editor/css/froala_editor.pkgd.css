@@ -1,7 +1,7 @@
 /*!
- * froala_editor v2.8.5 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.7.3 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2018 Froala Labs
+ * Copyright 2014-2017 Froala Labs
  */
 
 .clearfix::after {
@@ -58,8 +58,22 @@
   -webkit-user-select: none;
   -ms-user-select: none;
 }
+.fr-element [contenteditable="false"] {
+  user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
 .fr-element [contenteditable="true"] {
   outline: 0px solid transparent;
+  user-select: text;
+  -o-user-select: text;
+  -moz-user-select: text;
+  -khtml-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
 }
 .fr-box a.fr-floating-btn {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 1px 1px rgba(0, 0, 0, 0.16);
@@ -101,8 +115,7 @@
   -o-transition: transform 0.2s ease 0s;
   fill: #1e88e5;
 }
-.fr-box a.fr-floating-btn i,
-.fr-box a.fr-floating-btn svg {
+.fr-box a.fr-floating-btn i {
   font-size: 14px;
   line-height: 32px;
 }
@@ -288,9 +301,7 @@ iframe.fr-iframe {
   width: auto;
 }
 .fr-toolbar .fr-command.fr-btn i,
-.fr-popup .fr-command.fr-btn i,
-.fr-toolbar .fr-command.fr-btn svg,
-.fr-popup .fr-command.fr-btn svg {
+.fr-popup .fr-command.fr-btn i {
   display: block;
   font-size: 14px;
   width: 14px;
@@ -346,9 +357,7 @@ iframe.fr-iframe {
 .fr-toolbar .fr-command.fr-btn.fr-dropdown span,
 .fr-popup .fr-command.fr-btn.fr-dropdown span,
 .fr-toolbar .fr-command.fr-btn.fr-dropdown img,
-.fr-popup .fr-command.fr-btn.fr-dropdown img,
-.fr-toolbar .fr-command.fr-btn.fr-dropdown svg,
-.fr-popup .fr-command.fr-btn.fr-dropdown svg {
+.fr-popup .fr-command.fr-btn.fr-dropdown img {
   margin-left: 8px;
   margin-right: 16px;
 }
@@ -641,7 +650,7 @@ body.prevent-scroll.fr-mobile {
   -ms-transition: height 0.2s ease 0s;
   -o-transition: height 0.2s ease 0s;
 }
-.fr-modal .fr-modal-wrapper .fr-modal-head .fr-modal-close {
+.fr-modal .fr-modal-wrapper .fr-modal-head i {
   padding: 12px;
   width: 20px;
   font-size: 16px;
@@ -651,6 +660,8 @@ body.prevent-scroll.fr-mobile {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
+}
+.fr-modal .fr-modal-wrapper .fr-modal-head i.fr-modal-close {
   position: absolute;
   top: 0;
   right: 0;
@@ -783,9 +794,6 @@ body.prevent-scroll.fr-mobile {
   -moz-opacity: 0;
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-}
-.fr-popup.fr-empty {
-  display: none !important;
 }
 .fr-popup .fr-hs {
   display: block !important;
@@ -1532,8 +1540,7 @@ textarea.fr-code {
   position: relative;
   z-index: 1;
 }
-.fr-popup .fr-color-set > span > i,
-.fr-popup .fr-color-set > span > svg {
+.fr-popup .fr-color-set > span > i {
   text-align: center;
   line-height: 32px;
   height: 32px;
@@ -2124,7 +2131,6 @@ body.fr-fullscreen {
   -moz-transition: padding 0.2s ease 0s, width 0.2s ease 0s, opacity 0.2s ease 0s;
   -ms-transition: padding 0.2s ease 0s, width 0.2s ease 0s, opacity 0.2s ease 0s;
   -o-transition: padding 0.2s ease 0s, width 0.2s ease 0s, opacity 0.2s ease 0s;
-  padding: 12px;
 }
 .fr-modal-head .fr-modal-head-line i.fr-modal-more.fr-not-available {
   opacity: 0;
@@ -2547,7 +2553,7 @@ div.fr-modal-body div.fr-image-list div.fr-image-container .fr-insert-img {
 }
 .fr-table-resizer {
   cursor: col-resize;
-  position: absolute;
+  position: fixed;
   z-index: 3;
   display: none;
 }
@@ -2670,7 +2676,7 @@ div.fr-modal-body div.fr-image-list div.fr-image-container .fr-insert-img {
   height: 12px;
 }
 .fr-insert-helper {
-  position: absolute;
+  position: fixed;
   z-index: 9999;
   white-space: nowrap;
 }

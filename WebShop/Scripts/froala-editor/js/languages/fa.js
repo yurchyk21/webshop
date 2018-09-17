@@ -1,7 +1,7 @@
 /*!
- * froala_editor v2.8.5 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.7.3 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2018 Froala Labs
+ * Copyright 2014-2017 Froala Labs
  */
 
 (function (factory) {
@@ -40,9 +40,9 @@ $.FE.LANGUAGE['fa'] = {
     "Type something": "\u0686\u06cc\u0632\u06cc \u0628\u0646\u0648\u06cc\u0633\u06cc\u062f",
 
     // Basic formatting
-    "Bold": "ضخیم",
-    "Italic": "خط کج",
-    "Underline": "خط زیر",
+    "Bold": "\u0636\u062e\u06cc\u0645",
+    "Italic": "\u062e\u0637 \u06a9\u062c",
+    "Underline": "\u062e\u0637 \u0632\u06cc\u0631",
     "Strikethrough": "\u062e\u0637 \u062e\u0648\u0631\u062f\u0647",
 
     // Main buttons
@@ -64,7 +64,7 @@ $.FE.LANGUAGE['fa'] = {
     "Colors": "\u0631\u0646\u06af",
     "Background": "\u0632\u0645\u06cc\u0646\u0647 \u0645\u062a\u0646",
     "Text": "\u0645\u062a\u0646",
-    "HEX Color": "کد رنگ",
+    "HEX Color": "شصت رنگ",
 
     // Paragraphs
     "Paragraph Format": "\u0642\u0627\u0644\u0628",
@@ -121,11 +121,11 @@ $.FE.LANGUAGE['fa'] = {
     "Display": "\u0646\u0634\u0627\u0646 \u062f\u0627\u062f\u0646",
     "Inline": "\u062e\u0637\u06cc",
     "Break Text": "\u0634\u06a9\u0633\u062a\u0646 \u0627\u0633\u062a\u0631\u0627\u062d\u062a",
-    "Alternative Text": "\u0645\u062a\u0646 \u062c\u0627\u06cc\u06af\u0632\u06cc\u0646",
+    "Alternate Text": "\u0645\u062a\u0646 \u062c\u0627\u06cc\u06af\u0632\u06cc\u0646",
     "Change Size": "\u062a\u063a\u06cc\u06cc\u0631 \u0627\u0646\u062f\u0627\u0632\u0647",
     "Width": "\u0639\u0631\u0636",
     "Height": "\u0627\u0631\u062a\u0641\u0627\u0639",
-    "Something went wrong. Please try again.": "خطایی رخ داده است ، لطفا مجددا تلاش کنید",
+    "Something went wrong. Please try again.": "\u0686\u06cc\u0632\u06cc \u0631\u0627 \u0627\u0634\u062a\u0628\u0627\u0647 \u0631\u0641\u062a\u002e \u0644\u0637\u0641\u0627 \u062f\u0648\u0628\u0627\u0631\u0647 \u062a\u0644\u0627\u0634 \u06a9\u0646\u06cc\u062f\u002e",
     "Image Caption": "عنوان تصویر",
     "Advanced Edit": "ویرایش پیشرفته",
 

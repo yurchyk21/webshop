@@ -1,7 +1,7 @@
 /*!
- * froala_editor v2.8.5 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.7.3 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2018 Froala Labs
+ * Copyright 2014-2017 Froala Labs
  */
 
 (function (factory) {
@@ -51,14 +51,14 @@ $.FE.LANGUAGE['sv'] = {
     "Cancel": "Avbryt",
     "OK": "Ok",
     "Back": "Tillbaka",
-    "Remove": "Ta bort",
-    "More": "Mer",
+    "Remove": "Avl\u00e4gsna",
+    "More": "Vi\u0161e",
     "Update": "Uppdatera",
     "Style": "Stil",
 
     // Font
     "Font Family": "Teckensnitt",
-    "Font Size": "Teckenstorlek",
+    "Font Size": "Storlek",
 
     // Colors
     "Colors": "F\u00e4rger",
@@ -76,14 +76,14 @@ $.FE.LANGUAGE['sv'] = {
     "Heading 4": "Rubrik 4",
 
     // Style
-    "Paragraph Style": "Styckesformat",
+    "Paragraph Style": "Styckeformat",
     "Inline Style": "Infogad stil",
 
     // Alignment
     "Align": "Justera",
-    "Align Left": "Vänsterjustera",
+    "Align Left": "V\u00e4nsterst\u00e4ll",
     "Align Center": "Centrera",
-    "Align Right": "Högerjustera",
+    "Align Right": "H\u00f6gerst\u00e4ll",
     "Align Justify": "Justera",
     "None": "Inget",
 
@@ -108,25 +108,25 @@ $.FE.LANGUAGE['sv'] = {
     "Upload Image": "Ladda upp en bild",
     "By URL": "Genom URL",
     "Browse": "Bl\u00e4ddra",
-    "Drop image": "Sl\u00e4pp bild",
+    "Drop image": "Sl\u00e4ppa bild",
     "or click": "eller klicka",
     "Manage Images": "Hantera bilder",
-    "Loading": "Laddar",
-    "Deleting": "Raderar",
-    "Tags": "Etiketter",
+    "Loading": "L\u00e4ser",
+    "Deleting": "Radera",
+    "Tags": "Taggar",
     "Are you sure? Image will be deleted.": "\u00c4r du s\u00e4ker? Bild kommer att raderas.",
     "Replace": "Ers\u00e4tt",
-    "Uploading": "Laddar up",
+    "Uploading": "Uppladdning",
     "Loading image": "Laddar bild",
     "Display": "Visa",
-    "Inline": "I linje",
-    "Break Text": "Bryt text",
-    "Alternative Text": "Alternativ text",
+    "Inline": "I k\u00f6",
+    "Break Text": "Break text",
+    "Alternate Text": "Alternativ text",
     "Change Size": "\u00c4ndra storlek",
     "Width": "Bredd",
     "Height": "H\u00f6jd",
-    "Something went wrong. Please try again.": "N\u00e5got gick fel. Var god f\u00f6rs\u00f6k igen.",
-    "Image Caption": "Bildtext",
+    "Something went wrong. Please try again.": "N\u00e5got gick snett. Var god f\u00f6rs\u00f6k igen.",
+    "Image Caption": "Bildtextning",
     "Advanced Edit": "Avancerad redigering",
 
     // Video
@@ -146,28 +146,28 @@ $.FE.LANGUAGE['sv'] = {
     "Row": "Rad",
     "Insert row above": "Infoga rad f\u00f6re",
     "Insert row below": "Infoga rad efter",
-    "Delete row": "Ta bort rad",
+    "Delete row": "Radera rad",
     "Column": "Kolumn",
     "Insert column before": "Infoga kollumn f\u00f6re",
     "Insert column after": "Infoga kolumn efter",
-    "Delete column": "Ta bort kolumn",
+    "Delete column": "Radera kolumn",
     "Cell": "Cell",
     "Merge cells": "Sammanfoga celler",
-    "Horizontal split": "Dela horisontellt",
-    "Vertical split": "Dela vertikalt",
-    "Cell Background": "Cellbakgrund",
-    "Vertical Align": "Vertikal justering",
-    "Top": "Överst",
+    "Horizontal split": "Horisontell split",
+    "Vertical split": "Vertikal split",
+    "Cell Background": "Cellbakgrunden",
+    "Vertical Align": "Vertikala justeringen",
+    "Top": "Topp",
     "Middle": "Mitten",
-    "Bottom": "Nederst",
-    "Align Top": "Justera överst",
+    "Bottom": "Botten",
+    "Align Top": "Justera topp",
     "Align Middle": "Justera mitten",
-    "Align Bottom": "Justera nederst",
+    "Align Bottom": "Justera botten",
     "Cell Style": "Cellformat",
 
     // Files
     "Upload File": "Ladda upp fil",
-    "Drop file": "Sl\u00e4pp fil",
+    "Drop file": "Sl\u00e4ppa fil",
 
     // Emoticons
     "Emoticons": "Uttryckssymboler",
@@ -229,11 +229,11 @@ $.FE.LANGUAGE['sv'] = {
     "Face with medical mask": "Ansikte med medicinsk maskera",
 
     // Line breaker
-    "Break": "Ny rad",
+    "Break": "Break",
 
     // Math
     "Subscript": "Neds\u00e4nkt",
-    "Superscript": "Upph\u00f6jd",
+    "Superscript": "Upph\u00f6jd text",
 
     // Full screen
     "Fullscreen": "Helsk\u00e4rm",
@@ -252,18 +252,18 @@ $.FE.LANGUAGE['sv'] = {
     "Select All": "Markera allt",
 
     // Code view
-    "Code View": "Kodvy",
+    "Code View": "Kodvyn",
 
     // Quote
-    "Quote": "Citat",
+    "Quote": "Citerar",
     "Increase": "\u00d6ka",
     "Decrease": "Minska",
 
     // Quick Insert
-    "Quick Insert": "Snabbinfoga",
+    "Quick Insert": "Snabb insats",
 
     // Spcial Characters
-    "Special Characters": "Specialtecken",
+    "Special Characters": "Speciella karaktärer",
     "Latin": "Latin",
     "Greek": "Grekisk",
     "Cyrillic": "Cyrillic",
@@ -271,7 +271,7 @@ $.FE.LANGUAGE['sv'] = {
     "Currency": "Valuta",
     "Arrows": "Pilar",
     "Math": "Matematik",
-    "Misc": "Övrigt",
+    "Misc": "Misc",
 
     // Print.
     "Print": "Skriva ut",
@@ -280,37 +280,37 @@ $.FE.LANGUAGE['sv'] = {
     "Spell Checker": "Stavningskontroll",
 
     // Help
-    "Help": "Hjälp",
+    "Help": "Hjälpa",
     "Shortcuts": "Genvägar",
     "Inline Editor": "Inline editor",
     "Show the editor": "Visa redigeraren",
-    "Common actions": "Vanliga kommandon",
+    "Common actions": "Gemensamma åtgärder",
     "Copy": "Kopiera",
-    "Cut": "Klipp ut",
-    "Paste": "Klistra in",
+    "Cut": "Skära",
+    "Paste": "Klistra",
     "Basic Formatting": "Grundläggande formatering",
     "Increase quote level": "Öka citatnivå",
-    "Decrease quote level": "Minska citatnivå",
+    "Decrease quote level": "Sänk citatnivå",
     "Image / Video": "Bild / video",
-    "Resize larger": "Öka storlek",
-    "Resize smaller": "Minska storlek",
+    "Resize larger": "Ändra storlek större",
+    "Resize smaller": "Ändra storlek mindre",
     "Table": "Tabell",
-    "Select table cell": "Markera tabellcell",
-    "Extend selection one cell": "Utöka markering en cell",
-    "Extend selection one row": "Utöka markering en rad",
+    "Select table cell": "Välj tabellcell",
+    "Extend selection one cell": "Utvidga valet en cell",
+    "Extend selection one row": "Förlänga valet en rad",
     "Navigation": "Navigering",
-    "Focus popup / toolbar": "Fokusera popup / verktygsfältet",
-    "Return focus to previous position": "Byt fokus till föregående plats",
+    "Focus popup / toolbar": "Fokus popup / verktygsfältet",
+    "Return focus to previous position": "Returnera fokus till tidigare position",
 
     // Embed.ly
     "Embed URL": "Bädda in url",
     "Paste in a URL to embed": "Klistra in i en url för att bädda in",
 
     // Word Paste.
-    "The pasted content is coming from a Microsoft Word document. Do you want to keep the format or clean it up?": "Den inklippta texten kommer från ett Microsoft Word-dokument. Vill du behålla formateringen eller städa upp det?",
-    "Keep": "Behåll",
-    "Clean": "Städa upp",
-    "Word Paste Detected": "Urklipp från Word upptäckt"
+    "The pasted content is coming from a Microsoft Word document. Do you want to keep the format or clean it up?": "Det klistrade innehållet kommer från ett Microsoft Word-dokument. vill du hålla formatet eller städa upp det?",
+    "Keep": "Ha kvar",
+    "Clean": "Rena",
+    "Word Paste Detected": "Ordpasta upptäcks"
   },
   direction: "ltr"
 };

@@ -1,7 +1,7 @@
 /*!
- * froala_editor v2.8.5 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.7.3 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2018 Froala Labs
+ * Copyright 2014-2017 Froala Labs
  */
 
 (function (factory) {
@@ -121,7 +121,7 @@ $.FE.LANGUAGE['en_gb'] = {
     "Display": "Display",
     "Inline": "Inline",
     "Break Text": "Break Text",
-    "Alternative Text": "Alternative Text",
+    "Alternate Text": "Alternate Text",
     "Change Size": "Change Size",
     "Width": "Width",
     "Height": "Height",

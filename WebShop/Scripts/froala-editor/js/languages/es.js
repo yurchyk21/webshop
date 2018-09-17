@@ -1,7 +1,7 @@
 /*!
- * froala_editor v2.8.5 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.7.3 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2018 Froala Labs
+ * Copyright 2014-2017 Froala Labs
  */
 
 (function (factory) {
@@ -121,7 +121,7 @@ $.FE.LANGUAGE['es'] = {
     "Display": "Mostrar",
     "Inline": "En l\u00ednea",
     "Break Text": "Romper texto",
-    "Alternative Text": "Texto alternativo",
+    "Alternate Text": "Texto alternativo",
     "Change Size": "Cambiar tama\u00f1o",
     "Width": "Ancho",
     "Height": "Altura",

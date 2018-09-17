@@ -11,8 +11,22 @@
             cursor: pointer;
         }
     </style>
+
+    <link href="~/Scripts/froala-editor/css/plugins/char_counter.css" rel="stylesheet" />
+    <link href="~/Scripts/froala-editor/css/plugins/code_view.css" rel="stylesheet" />
+    <link href="~/Scripts/froala-editor/css/plugins/colors.css" rel="stylesheet" />
+    <link href="~/Scripts/froala-editor/css/plugins/draggable.css" rel="stylesheet" />
+    <link href="~/Scripts/froala-editor/css/plugins/emoticons.css" rel="stylesheet" />
+    <link href="~/Scripts/froala-editor/css/plugins/image.css" rel="stylesheet" />
+    <link href="~/Scripts/froala-editor/css/plugins/image_manager.css" rel="stylesheet" />
+    <link href="~/Scripts/froala-editor/css/plugins/line_breaker.css" rel="stylesheet" />
+    <link href="~/Scripts/froala-editor/css/plugins/quick_insert.css" rel="stylesheet" />
+    <link href="~/Scripts/froala-editor/css/plugins/table.css" rel="stylesheet" />
+    <link href="~/Scripts/froala-editor/css/plugins/video.css" rel="stylesheet" />
+    <link href="~/Scripts/froala-editor/css/editor_custom.css" rel="stylesheet" />
     <link href="~/Scripts/froala-editor/css/froala_editor.css" rel="stylesheet" />
     <link href="~/Scripts/froala-editor/css/froala_style.css" rel="stylesheet" />
+
 }
 
 @Styles.Render("~/Content/Accordeon")
@@ -64,40 +78,62 @@
 
 </div>
 @section Scripts {
-
-    <script src="~/Scripts/froala-editor/js/froala_editor.min.js"></script>
-    <script>
-        $('div#froala-editor').froalaEditor({
-            // Set image buttons, including the name
-            // of the buttons defined in customImageButtons.
-            imageEditButtons: ['imageDisplay', 'imageAlign', 'imageInfo', 'imageRemove']
-        })
-    </script>
-
-    <script>
-        //tinymce.init({
-        //    selector: 'textarea#Description',
-        //    height: 500,
-        //    theme: 'modern',
-        //    plugins: 'print preview fullpage powerpaste searchreplace autolink directionality advcode visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount tinymcespellchecker a11ychecker imagetools mediaembed  linkchecker contextmenu colorpicker textpattern help',
-        //    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
-        //    image_advtab: true,
-        //    templates: [
-        //        { title: 'Test template 1', content: 'Test 1' },
-        //        { title: 'Test template 2', content: 'Test 2' }
-        //    ],
-        //    content_css: [
-        //        '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-        //        '//www.tinymce.com/css/codepen.min.css'
-        //    ]
-        //});
-
-
-
-
-    </script>
-
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/froala-editor/js/ua.js"></script>
+    <script src="~/Scripts/froala-editor/js/froala_editor.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/align.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/char_counter.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/code_beautifier.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/code_view.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/colors.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/draggable.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/emoticons.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/entities.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/font_family.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/font_size.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/forms.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/image.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/image_manager.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/line_breaker.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/link.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/lists.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/paragraph_format.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/paragraph_style.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/quick_insert.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/quote.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/save.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/table.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/url.min.js"></script>
+    <script src="~/Scripts/froala-editor/js/plugins/video.min.js"></script>
+
+    <script>
+        $(function () {
+            $(".html-editor-autoinit").froalaEditor({
+                toolbarButtons: ['bold', 'italic', 'underline', 'paragraphFormat', '|',
+                    'color', 'emoticons', 'formatUL', 'formatOL', 'align', 'outdent', 'indent', '|',
+                    'quote', 'insertHR', 'insertLink', 'insertImage', 'insertVideo', 'insertTable', 'undo', 'redo', 'clearFormatting', 'html'],
+                imageUploadURL: '/Products/UploadImageDecription',
+                imageMaxSize: 2 * 1024 * 1024,
+                paragraphFormat: {
+                    N: 'Звичайний',
+                    H2: 'H2',
+                    H3: 'H3',
+                    H4: 'H4',
+                    H5: 'H5',
+                    H6: 'H6'
+                },
+                language: 'ua'
+            }).on('froalaEditor.image.error', function (e, ditor, error, response) {
+                if (error.code == 5) {
+                    alert("Розмір файлу не повинен бути більше 2 мб.");
+                }
+                return false;
+            });
+        });
+    </script>
+
+
     <script>
         $(document).ready(function () {
             // Add minus icon for collapse element which is open by default

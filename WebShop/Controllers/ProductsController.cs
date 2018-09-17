@@ -223,6 +223,12 @@ namespace WebShop.Controllers
 
             return Content(json, "application/json");
         }
+        [HttpPost]
+        public JsonResult UploadImageDecription(HttpPostedFileBase file)
+        {
+
+            return Json(new { link = "/Images/Product/Description/default.jpg" });
+        }
     }
 
 }

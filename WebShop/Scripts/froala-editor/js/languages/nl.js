@@ -1,7 +1,7 @@
 /*!
- * froala_editor v2.8.5 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.7.3 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2018 Froala Labs
+ * Copyright 2014-2017 Froala Labs
  */
 
 (function (factory) {
@@ -58,13 +58,13 @@ $.FE.LANGUAGE['nl'] = {
 
     // Font
     "Font Family": "Lettertype",
-    "Font Size": "Lettergrootte",
+    "Font Size": "Letter grootte",
 
     // Colors
     "Colors": "Kleuren",
     "Background": "Achtergrond",
     "Text": "Tekst",
-    "HEX Color": "HEX kleur",
+    "HEX Color": "Hex kleur",
 
     // Paragraphs
     "Paragraph Format": "Opmaak",
@@ -77,7 +77,7 @@ $.FE.LANGUAGE['nl'] = {
 
     // Style
     "Paragraph Style": "Paragraaf stijl",
-    "Inline Style": "Inline stijl",
+    "Inline Style": "In de rij stijl",
 
     // Alignment
     "Align": "Uitlijnen",
@@ -96,7 +96,7 @@ $.FE.LANGUAGE['nl'] = {
     "Increase Indent": "Inspringen vergroten",
 
     // Links
-    "Insert Link": "Link invoegen",
+    "Insert Link": "Hyperlink invoegen",
     "Open in new tab": "Openen in nieuwe tab",
     "Open Link": "Open link",
     "Edit Link": "Link bewerken",
@@ -107,8 +107,8 @@ $.FE.LANGUAGE['nl'] = {
     "Insert Image": "Afbeelding invoegen",
     "Upload Image": "Afbeelding uploaden",
     "By URL": "Via URL",
-    "Browse": "Bladeren",
-    "Drop image": "Sleep afbeelding",
+    "Browse": "Blader",
+    "Drop image": "Drop afbeelding",
     "or click": "of klik op",
     "Manage Images": "Afbeeldingen beheren",
     "Loading": "Bezig met laden",
@@ -119,9 +119,9 @@ $.FE.LANGUAGE['nl'] = {
     "Uploading": "Uploaden",
     "Loading image": "Afbeelding laden",
     "Display": "Tonen",
-    "Inline": "Inline",
+    "Inline": "In lijn",
     "Break Text": "Tekst afbreken",
-    "Alternative Text": "Alternatieve tekst",
+    "Alternate Text": "Alternatieve tekst",
     "Change Size": "Grootte wijzigen",
     "Width": "Breedte",
     "Height": "Hoogte",
@@ -132,10 +132,10 @@ $.FE.LANGUAGE['nl'] = {
     // Video
     "Insert Video": "Video invoegen",
     "Embedded Code": "Ingebedde code",
-    "Paste in a video URL": "Voeg een video-URL toe",
-    "Drop video": "Sleep video",
+    "Paste in a video URL": "Plak in een video-URL",
+    "Drop video": "Video laten vallen",
     "Your browser does not support HTML5 video.": "Je browser ondersteunt geen html5-video.",
-    "Upload Video": "Video uploaden",
+    "Upload Video": "Upload video",
 
     // Tables
     "Insert Table": "Tabel invoegen",
@@ -166,8 +166,8 @@ $.FE.LANGUAGE['nl'] = {
     "Cell Style": "Celstijl",
 
     // Files
-    "Upload File": "Bestand uploaden",
-    "Drop file": "Sleep bestand",
+    "Upload File": "Upload bestand",
+    "Drop file": "Drop bestand",
 
     // Emoticons
     "Emoticons": "Emoticons",
@@ -257,7 +257,7 @@ $.FE.LANGUAGE['nl'] = {
     // Quote
     "Quote": "Citaat",
     "Increase": "Toenemen",
-    "Decrease": "Afnemen",
+    "Decrease": "Daling",
 
     // Quick Insert
     "Quick Insert": "Snel invoegen",
@@ -280,37 +280,37 @@ $.FE.LANGUAGE['nl'] = {
     "Spell Checker": "Spellingscontrole",
 
     // Help
-    "Help": "Hulp",
+    "Help": "Helpen",
     "Shortcuts": "Snelkoppelingen",
     "Inline Editor": "Inline editor",
     "Show the editor": "Laat de editor zien",
-    "Common actions": "Algemene acties",
+    "Common actions": "Gemeenschappelijke acties",
     "Copy": "Kopiëren",
-    "Cut": "Knippen",
+    "Cut": "Besnoeiing",
     "Paste": "Plakken",
     "Basic Formatting": "Basisformattering",
     "Increase quote level": "Citaat niveau verhogen",
     "Decrease quote level": "Citaatniveau verminderen",
     "Image / Video": "Beeld / video",
-    "Resize larger": "Groter maken",
-    "Resize smaller": "Kleiner maken",
-    "Table": "Tabel",
+    "Resize larger": "Grootte groter",
+    "Resize smaller": "Kleiner formaat wijzigen",
+    "Table": "Tafel",
     "Select table cell": "Selecteer tabelcel",
     "Extend selection one cell": "Selecteer een cel uit",
     "Extend selection one row": "Selecteer een rij uit",
     "Navigation": "Navigatie",
     "Focus popup / toolbar": "Focus pop-up / werkbalk",
-    "Return focus to previous position": "Focus terug naar vorige positie",
+    "Return focus to previous position": "Terugkeer focus naar vorige positie",
 
     // Embed.ly
     "Embed URL": "Embed url",
-    "Paste in a URL to embed": "Voer een URL in om toe te voegen",
+    "Paste in a URL to embed": "Plak in een url om in te vullen",
 
     // Word Paste.
-    "The pasted content is coming from a Microsoft Word document. Do you want to keep the format or clean it up?": "De geplakte inhoud komt uit een Microsoft Word-document. wil je het formaat behouden of schoonmaken?",
-    "Keep": "Opmaak behouden",
-    "Clean": "Tekst schoonmaken",
-    "Word Paste Detected": "Word inhoud gedetecteerd"
+    "The pasted content is coming from a Microsoft Word document. Do you want to keep the format or clean it up?": "De geplakte inhoud komt uit een Microsoft Word-document. wil je het formaat behouden of opruimen?",
+    "Keep": "Houden",
+    "Clean": "Schoon",
+    "Word Paste Detected": "Woordpasta gedetecteerd"
   },
   direction: "ltr"
 };

@@ -1,7 +1,7 @@
 /*!
- * froala_editor v2.8.5 (https://www.froala.com/wysiwyg-editor)
+ * froala_editor v2.7.3 (https://www.froala.com/wysiwyg-editor)
  * License https://froala.com/wysiwyg-editor/terms/
- * Copyright 2014-2018 Froala Labs
+ * Copyright 2014-2017 Froala Labs
  */
 
 .clearfix::after {
@@ -53,8 +53,7 @@
   -o-transition: transform 0.2s ease 0s;
   fill: #ffca28;
 }
-.red-theme.fr-box a.fr-floating-btn i,
-.red-theme.fr-box a.fr-floating-btn svg {
+.red-theme.fr-box a.fr-floating-btn i {
   font-size: 14px;
   line-height: 32px;
 }
@@ -212,8 +211,7 @@
 .red-theme.fr-popup .fr-color-set {
   line-height: 0;
 }
-.red-theme.fr-popup .fr-color-set > span > i,
-.red-theme.fr-popup .fr-color-set > span > svg {
+.red-theme.fr-popup .fr-color-set > span > i {
   bottom: 0;
   left: 0;
 }
@@ -777,9 +775,7 @@
   width: auto;
 }
 .red-theme.fr-toolbar .fr-command.fr-btn i,
-.red-theme.fr-popup .fr-command.fr-btn i,
-.red-theme.fr-toolbar .fr-command.fr-btn svg,
-.red-theme.fr-popup .fr-command.fr-btn svg {
+.red-theme.fr-popup .fr-command.fr-btn i {
   font-size: 14px;
   width: 14px;
   margin: 12px 12px;
@@ -811,9 +807,7 @@
 .red-theme.fr-toolbar .fr-command.fr-btn.fr-dropdown span,
 .red-theme.fr-popup .fr-command.fr-btn.fr-dropdown span,
 .red-theme.fr-toolbar .fr-command.fr-btn.fr-dropdown img,
-.red-theme.fr-popup .fr-command.fr-btn.fr-dropdown img,
-.red-theme.fr-toolbar .fr-command.fr-btn.fr-dropdown svg,
-.red-theme.fr-popup .fr-command.fr-btn.fr-dropdown svg {
+.red-theme.fr-popup .fr-command.fr-btn.fr-dropdown img {
   margin-left: 8px;
   margin-right: 16px;
 }
@@ -981,7 +975,7 @@
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
   margin: 20px auto;
-  background: #b8312f;
+  background: #ffffff;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
@@ -1009,8 +1003,10 @@
   -ms-transition: height 0.2s ease 0s;
   -o-transition: height 0.2s ease 0s;
 }
-.red-theme.fr-modal .fr-modal-wrapper .fr-modal-head .fr-modal-close {
+.red-theme.fr-modal .fr-modal-wrapper .fr-modal-head i {
   color: #ffffff;
+}
+.red-theme.fr-modal .fr-modal-wrapper .fr-modal-head i.fr-modal-close {
   top: 0;
   right: 0;
   -webkit-transition: color 0.2s ease 0s;

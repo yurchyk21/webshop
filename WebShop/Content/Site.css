@@ -59,4 +59,8 @@ body.open:after {
     max-width: 100%;
 }
 
+.hideElement {
+    display:none;
+}
+
 
