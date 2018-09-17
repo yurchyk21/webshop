@@ -1,6 +1,6 @@
 ﻿@model WebShop.Models.Entities.Product
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create","Products",FormMethod.Post, new { @id="form" }))
 {
     @Html.AntiForgeryToken()
 
@@ -45,7 +45,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" id="btn_product_add" value="Create" class="btn btn-default" />
             </div>
         </div>
     </div>
