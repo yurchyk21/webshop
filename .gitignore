@@ -9,6 +9,11 @@ App_Data/
 ProductImages/
 
 #################
+##Images
+
+Images/
+
+#################
 ##UploadedFiles
 
 UploadedFiles/

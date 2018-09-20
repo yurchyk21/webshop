@@ -260,10 +260,15 @@
     <Compile Include="Migrations\201809121546283_image mapping product.Designer.cs">
       <DependentUpon>201809121546283_image mapping product.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809201616450_Add tblProductImageBaskets.cs" />
+    <Compile Include="Migrations\201809201616450_Add tblProductImageBaskets.Designer.cs">
+      <DependentUpon>201809201616450_Add tblProductImageBaskets.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\ProductImage.cs" />
+    <Compile Include="Models\Entities\ProductImageBasket.cs" />
     <Compile Include="Models\Entities\ProductMappingImages.cs" />
     <Compile Include="Models\Entities\ProductMetaData.cs" />
     <Compile Include="Models\Entities\UserProfile.cs" />
@@ -548,6 +553,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809121546283_image mapping product.resx">
       <DependentUpon>201809121546283_image mapping product.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809201616450_Add tblProductImageBaskets.resx">
+      <DependentUpon>201809201616450_Add tblProductImageBaskets.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

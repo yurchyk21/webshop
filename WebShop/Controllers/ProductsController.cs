@@ -4,10 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using WebShop.Healpers;
 using WebShop.Models;
 using WebShop.Models.Entities;
 using WebShop.ViewModels;
@@ -226,8 +229,35 @@ namespace WebShop.Controllers
         [HttpPost]
         public JsonResult UploadImageDecription(HttpPostedFileBase file)
         {
+            string link = string.Empty;
+            string filename = Guid.NewGuid().ToString() + ".jpg";
+            string image = Server.MapPath(Constants.ProductDescriptionPath) + filename;
+            try
+            {
+                // The Complete method commits the transaction. If an exception has been thrown,
+                // Complete is not  called and the transaction is rolled back.
+                Bitmap imgCropped = new Bitmap(file.InputStream);
+                var saveImage = ImageWorker.CreateImage(imgCropped, 450, 450);
+                if (saveImage == null)
+                    throw new Exception("Error save image");
+                saveImage.Save(image, ImageFormat.Jpeg);
+                link = Url.Content(Constants.ProductDescriptionPath) + filename;
+                ProductImageBasket pImage = new ProductImageBasket()
+                {
+                    Name = filename
+                };
+                _context.ProductImageBaskets.Add(pImage);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                if (System.IO.File.Exists(image))
+                {
+                    System.IO.File.Delete(image);
+                }
+            }
 
-            return Json(new { link = "/Images/Product/Description/default.jpg" });
+            return Json(new { link });
         }
     }
 
