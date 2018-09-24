@@ -39,7 +39,7 @@ namespace WebShop.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<ProductMappingImage> ProductMappingImages { get; set; }
-
+        public DbSet<ProductImageBasket> ProductImageBaskets { get; set; }
 
         #endregion
     }

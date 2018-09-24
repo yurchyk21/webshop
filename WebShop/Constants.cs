@@ -19,6 +19,13 @@ namespace WebShop
                 return ConfigurationManager.AppSettings["ProductThumbnailPath"];
             }
         }
+        public static string ProductDescriptionPath
+        {
+            get
+            {
+                return ConfigurationManager.AppSettings["ProductDescriptionPath"];
+            }
+        }
         public static int PageItems
         {
             get
