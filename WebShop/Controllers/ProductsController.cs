@@ -128,6 +128,21 @@ namespace WebShop.Controllers
             ViewBag.CategoryId = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
             return View(product);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(ProductAddViewModel product)
+        {
+            if (ModelState.IsValid)
+            {
+
+                //_context.Products.Add(product);
+                //_context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.CategoryId = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
+            return View(product);
+        }
 
         // GET: Products/Edit/5
         public ActionResult Edit(int? id)
@@ -259,7 +274,7 @@ namespace WebShop.Controllers
                 }
             }
 
-            return Json(new { link });
+            return Json(new { link, filename });
         }
 
         [HttpPost]
