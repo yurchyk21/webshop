@@ -7,13 +7,13 @@ namespace WebShop.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddtblProductImageBaskets : IMigrationMetadata
+    public sealed partial class AddtblProductDescriptionImages : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddtblProductImageBaskets));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddtblProductDescriptionImages));
         
         string IMigrationMetadata.Id
         {
-            get { return "201809201616450_Add tblProductImageBaskets"; }
+            get { return "201809241614373_Add tblProductDescriptionImages"; }
         }
         
         string IMigrationMetadata.Source

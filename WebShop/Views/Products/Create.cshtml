@@ -91,7 +91,26 @@
                     alert("Розмір файлу не повинен бути більше 2 мб.");
                 }
                 return false;
-            });
+                })
+                // Catch image remove
+                .on('froalaEditor.image.removed', function (e, editor, $img) {
+                    $.ajax({
+                        // Request method.
+                        method: "POST",
+
+                        // Request URL.
+                        url: "/Products/DeleteImageDecription",
+
+                        // Request params.
+                        data: {
+                            src: $img.attr('src')
+                        }
+                    }).done(function (data) {
+                        //var data = JSON.parse(response);
+                        //$('#divImages :input[value="' + data.filename + '"]').remove();
+                         console.log(data);
+                    });
+                });
             $("#form").on("click", "#btn_product_add", function () {
                 var textHtml = $("#textEdit").froalaEditor("html.get");
                 $("#Description").val(textHtml);

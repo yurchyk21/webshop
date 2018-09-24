@@ -7,12 +7,14 @@ using System.Web;
 
 namespace WebShop.Models.Entities
 {
-    [Table("tblProductImageBaskets")]
-    public class ProductImageBasket
+    [Table("tblProductDescriptionImages")]
+    public class ProductDescriptionImage
     {
         [Key]
-        public int Id { get; set; }
         [StringLength(150)]
         public string Name { get; set; }
+        [ForeignKey("Product")]
+        public int? ProductId { get; set; }
+        public virtual Product Product { get; set; }
     }
 }
