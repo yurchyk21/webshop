@@ -131,18 +131,39 @@ namespace WebShop.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(ProductAddViewModel product)
+        public ActionResult Add(ProductAddViewModel model)
         {
             if (ModelState.IsValid)
             {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    Product product = new Product()
+                    {
+                        Name = model.Name,
+                        Price = model.Price,
+                        Description = model.Description,
+                        CategoryId=model.CategoryId
+                    };
+                    _context.Products.Add(product);
+                    for (int i = 0; i < model.DescriptionImages.Count(); i++)
+                    {
+                        var temp = model.DescriptionImages[i];
+                        if (temp != null)
+                        {
+                            _context.ProductDescriptionImages
+                                .FirstOrDefault(t => t.Name == temp)
+                                .ProductId = product.Id;
+                        }
 
-                //_context.Products.Add(product);
-                //_context.SaveChanges();
-                return RedirectToAction("Index");
+                    }
+                    _context.SaveChanges();
+                    scope.Complete();
+                }
+                    return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
-            return View(product);
+            ViewBag.CategoryId = new SelectList(_context.Categories, "Id", "Name", model.CategoryId);
+            return View(model);
         }
 
         // GET: Products/Edit/5
