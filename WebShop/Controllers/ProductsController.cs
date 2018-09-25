@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -176,7 +177,37 @@ namespace WebShop.Controllers
             ViewBag.CategoryId = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
             return View(product);
         }
+        //Буде чистити фотки на сайті
+        public static void ClearImages()
+        {
+            var context= new ApplicationDbContext();
+            var listImages = context.ProductDescriptionImages
+                .Where(p => p.ProductId == null).ToList();
+            foreach (var item in listImages)
+            {
+                try
+                {
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        string path = System.Web.Hosting.HostingEnvironment
+                            .MapPath(Constants.ProductDescriptionPath);
+                        string image = path + item.Name;
+                        context.ProductDescriptionImages.Remove(item);
+                        context.SaveChanges();
 
+                        if (System.IO.File.Exists(image))
+                        {
+                            System.IO.File.Delete(image);
+                        }
+                        scope.Complete();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
