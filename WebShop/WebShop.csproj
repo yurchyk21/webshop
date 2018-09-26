@@ -260,15 +260,15 @@
     <Compile Include="Migrations\201809121546283_image mapping product.Designer.cs">
       <DependentUpon>201809121546283_image mapping product.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201809201616450_Add tblProductImageBaskets.cs" />
-    <Compile Include="Migrations\201809201616450_Add tblProductImageBaskets.Designer.cs">
-      <DependentUpon>201809201616450_Add tblProductImageBaskets.cs</DependentUpon>
+    <Compile Include="Migrations\201809241614373_Add tblProductDescriptionImages.cs" />
+    <Compile Include="Migrations\201809241614373_Add tblProductDescriptionImages.Designer.cs">
+      <DependentUpon>201809241614373_Add tblProductDescriptionImages.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entities\Category.cs" />
     <Compile Include="Models\Entities\ProductImage.cs" />
-    <Compile Include="Models\Entities\ProductImageBasket.cs" />
+    <Compile Include="Models\Entities\ProductDescriptionImage.cs" />
     <Compile Include="Models\Entities\ProductMappingImages.cs" />
     <Compile Include="Models\Entities\ProductMetaData.cs" />
     <Compile Include="Models\Entities\UserProfile.cs" />
@@ -279,6 +279,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ProductIndexViewModel.cs" />
+    <Compile Include="ViewModels\ProductViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Accordeon\accordeon.css" />
@@ -554,8 +555,8 @@
     <EmbeddedResource Include="Migrations\201809121546283_image mapping product.resx">
       <DependentUpon>201809121546283_image mapping product.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201809201616450_Add tblProductImageBaskets.resx">
-      <DependentUpon>201809201616450_Add tblProductImageBaskets.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201809241614373_Add tblProductDescriptionImages.resx">
+      <DependentUpon>201809241614373_Add tblProductDescriptionImages.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

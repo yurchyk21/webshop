@@ -11,7 +11,7 @@ namespace WebShop.Models.Entities
     public class ProductDescriptionImage
     {
         [Key]
-        [StringLength(maximumLength:150)]
+        [StringLength(150)]
         public string Name { get; set; }
         [ForeignKey("Product")]
         public int? ProductId { get; set; }

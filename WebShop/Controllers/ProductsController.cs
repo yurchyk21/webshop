@@ -6,8 +6,10 @@ using System.Data;
 using System.Data.Entity;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using WebShop.Healpers;
@@ -120,6 +122,21 @@ namespace WebShop.Controllers
             {
                 _context.Products.Add(product);
                 _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.CategoryId = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
+            return View(product);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(ProductAddViewModel product)
+        {
+            if (ModelState.IsValid)
+            {
+
+                //_context.Products.Add(product);
+                //_context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -242,11 +259,11 @@ namespace WebShop.Controllers
                     throw new Exception("Error save image");
                 saveImage.Save(image, ImageFormat.Jpeg);
                 link = Url.Content(Constants.ProductDescriptionPath) + filename;
-                ProductImageBasket pImage = new ProductImageBasket()
+                ProductDescriptionImage pImage = new ProductDescriptionImage()
                 {
                     Name = filename
                 };
-                _context.ProductImageBaskets.Add(pImage);
+                _context.ProductDescriptionImages.Add(pImage);
                 _context.SaveChanges();
             }
             catch (Exception)
@@ -257,7 +274,42 @@ namespace WebShop.Controllers
                 }
             }
 
-            return Json(new { link });
+            return Json(new { link, filename });
+        }
+
+        [HttpPost]
+        public JsonResult DeleteImageDecription(string src)
+        {
+            string link = string.Empty;
+            string filename = Path.GetFileName(src);
+            string image = Server.MapPath(Constants.ProductDescriptionPath) +
+                filename;
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    var pdImage = _context
+                        .ProductDescriptionImages
+                        .SingleOrDefault(p => p.Name == filename);
+                    if (pdImage != null)
+                    {
+                        _context.ProductDescriptionImages.Remove(pdImage);
+                        _context.SaveChanges();
+                    }
+                    //throw new Exception("Галяк");
+                    if (System.IO.File.Exists(image))
+                    {
+                        System.IO.File.Delete(image);
+                    }
+                    scope.Complete();
+                }
+            }
+            catch
+            {
+                filename = string.Empty;
+            }
+
+            return Json(new { filename });
         }
     }
 
