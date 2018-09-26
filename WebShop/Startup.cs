@@ -1,9 +1,12 @@
 ﻿using Autofac;
 using Autofac.Integration.Mvc;
+using Hangfire;
 using Microsoft.Owin;
 using Owin;
 using System.Web.Mvc;
+using WebShop.Controllers;
 using WebShop.Core;
+using WebShop.Models;
 
 [assembly: OwinStartupAttribute(typeof(WebShop.Startup))]
 namespace WebShop
@@ -28,6 +31,17 @@ namespace WebShop
             app.UseAutofacMvc();
 
             ConfigureAuth(app);
+            GlobalConfiguration.Configuration
+                .UseSqlServerStorage("DefaultConnection");
+
+            app.UseHangfireDashboard("/myJobDashbord", new DashboardOptions()
+            {
+                Authorization = new[] { new HangfireAuthorizationFilter()}
+            });
+            RecurringJob.AddOrUpdate(
+                () => ProductsController.ClearImages(), Cron.Minutely()
+            );
+            app.UseHangfireServer();
         }
     }
 }

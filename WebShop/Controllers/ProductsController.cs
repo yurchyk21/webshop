@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -130,18 +131,39 @@ namespace WebShop.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(ProductAddViewModel product)
+        public ActionResult Add(ProductAddViewModel model)
         {
             if (ModelState.IsValid)
             {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    Product product = new Product()
+                    {
+                        Name = model.Name,
+                        Price = model.Price,
+                        Description = model.Description,
+                        CategoryId=model.CategoryId
+                    };
+                    _context.Products.Add(product);
+                    for (int i = 0; i < model.DescriptionImages.Count(); i++)
+                    {
+                        var temp = model.DescriptionImages[i];
+                        if (temp != null)
+                        {
+                            _context.ProductDescriptionImages
+                                .FirstOrDefault(t => t.Name == temp)
+                                .ProductId = product.Id;
+                        }
 
-                //_context.Products.Add(product);
-                //_context.SaveChanges();
-                return RedirectToAction("Index");
+                    }
+                    _context.SaveChanges();
+                    scope.Complete();
+                }
+                    return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
-            return View(product);
+            ViewBag.CategoryId = new SelectList(_context.Categories, "Id", "Name", model.CategoryId);
+            return View(model);
         }
 
         // GET: Products/Edit/5
@@ -176,7 +198,37 @@ namespace WebShop.Controllers
             ViewBag.CategoryId = new SelectList(_context.Categories, "Id", "Name", product.CategoryId);
             return View(product);
         }
+        //Буде чистити фотки на сайті
+        public static void ClearImages()
+        {
+            var context= new ApplicationDbContext();
+            var listImages = context.ProductDescriptionImages
+                .Where(p => p.ProductId == null).ToList();
+            foreach (var item in listImages)
+            {
+                try
+                {
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        string path = System.Web.Hosting.HostingEnvironment
+                            .MapPath(Constants.ProductDescriptionPath);
+                        string image = path + item.Name;
+                        context.ProductDescriptionImages.Remove(item);
+                        context.SaveChanges();
 
+                        if (System.IO.File.Exists(image))
+                        {
+                            System.IO.File.Delete(image);
+                        }
+                        scope.Complete();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            }
+        }
         // GET: Products/Delete/5
         public ActionResult Delete(int? id)
         {
