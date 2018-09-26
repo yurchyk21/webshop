@@ -267,6 +267,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entities\Category.cs" />
+    <Compile Include="Models\Entities\FilterName.cs" />
     <Compile Include="Models\Entities\ProductImage.cs" />
     <Compile Include="Models\Entities\ProductDescriptionImage.cs" />
     <Compile Include="Models\Entities\ProductMappingImages.cs" />
