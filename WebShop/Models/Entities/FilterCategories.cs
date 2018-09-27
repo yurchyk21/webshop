@@ -14,11 +14,14 @@ namespace WebShop.Models.Entities
         public int FilterNameId { get; set; }
         [Display(Name = "FilterName")]
         public virtual FilterName FilterNameOf { get; set; }
-        [ForeignKey("FilterValueOf"), Key, Column(Order = 1)]
-        public int FilterValueId { get; set; }
-        [Display(Name = "FilterValue")]
-        public virtual FilterValue FilterValueOf { get; set; }
-        [ForeignKey("CategoryOf"), Key, Column(Order = 2)]
+
+        //[ForeignKey("FilterValueOf"), Key, Column(Order = 1)]
+        //public int FilterValueId { get; set; }
+        //[Display(Name = "FilterValue")]
+        //public virtual FilterValue FilterValueOf { get; set; }
+
+
+        [ForeignKey("CategoryOf"), Key, Column(Order = 1)]
         public int CategoryId { get; set; }
         [Display(Name = "Category")]
         public virtual Category CategoryOf { get; set; }

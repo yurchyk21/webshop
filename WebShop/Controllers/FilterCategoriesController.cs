@@ -22,7 +22,7 @@ namespace WebShop.Controllers
         // GET: FilterCategories
         public ActionResult Index()
         {
-            var filterCategories = _context.FilterCategories.Include(f => f.CategoryOf).Include(f => f.FilterNameOf).Include(f => f.FilterValueOf);
+            var filterCategories = _context.FilterCategories.Include(f => f.CategoryOf).Include(f => f.FilterNameOf)/*.Include(f => f.FilterValueOf)*/;
             return View(filterCategories.ToList());
         }
 
@@ -108,7 +108,7 @@ namespace WebShop.Controllers
 
             ViewBag.CategoryId = new SelectList(_context.Categories, "Id", "Name", filterCategory.CategoryId);
             ViewBag.FilterNameId = new SelectList(_context.FiltersName, "Id", "Name", filterCategory.FilterNameId);
-            ViewBag.FilterValueId = new SelectList(_context.FiltersValue, "Id", "Name", filterCategory.FilterValueId);
+            //ViewBag.FilterValueId = new SelectList(_context.FiltersValue, "Id", "Name", filterCategory.FilterValueId);
             return View(filterCategory);
         }
 
@@ -126,7 +126,7 @@ namespace WebShop.Controllers
             }
             ViewBag.CategoryId = new SelectList(_context.Categories, "Id", "Name", filterCategory.CategoryId);
             ViewBag.FilterNameId = new SelectList(_context.FiltersName, "Id", "Name", filterCategory.FilterNameId);
-            ViewBag.FilterValueId = new SelectList(_context.FiltersValue, "Id", "Name", filterCategory.FilterValueId);
+            //ViewBag.FilterValueId = new SelectList(_context.FiltersValue, "Id", "Name", filterCategory.FilterValueId);
             return View(filterCategory);
         }
 
@@ -145,7 +145,7 @@ namespace WebShop.Controllers
             }
             ViewBag.CategoryId = new SelectList(_context.Categories, "Id", "Name", filterCategory.CategoryId);
             ViewBag.FilterNameId = new SelectList(_context.FiltersName, "Id", "Name", filterCategory.FilterNameId);
-            ViewBag.FilterValueId = new SelectList(_context.FiltersValue, "Id", "Name", filterCategory.FilterValueId);
+            //ViewBag.FilterValueId = new SelectList(_context.FiltersValue, "Id", "Name", filterCategory.FilterValueId);
             return View(filterCategory);
         }
 

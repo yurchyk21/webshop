@@ -10,11 +10,16 @@ namespace WebShop.Models.Entities
     [Table("tblFilterNameGroups")]
     public class FilterNameGroup
     {
-        [ForeignKey("FilterNameOf"), Key, Column(Order = 0)]
+        [Key, Column(Order = 0)]
+        public int Id { get; set; }
+        [ForeignKey("FilterNameOf"), Column(Order = 1)]
+
         public int FilterNameId { get; set; }
         public virtual FilterName FilterNameOf { get; set; }
-        [ForeignKey("FilterValueOf"), Key, Column(Order = 1)]
+
+        [ForeignKey("FilterValueOf"), Column(Order = 2)]
         public int FilterValueId { get; set; }
         public virtual FilterValue FilterValueOf { get; set; }
+
     }
 }
