@@ -73,6 +73,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -80,6 +83,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -219,10 +228,12 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FilterCategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductImagesController.cs" />
@@ -271,15 +282,24 @@
     <Compile Include="Migrations\201809241614373_Add tblProductDescriptionImages.Designer.cs">
       <DependentUpon>201809241614373_Add tblProductDescriptionImages.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809261554160_Filters table added..cs" />
+    <Compile Include="Migrations\201809261554160_Filters table added..Designer.cs">
+      <DependentUpon>201809261554160_Filters table added..cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Entities\Category.cs" />
+    <Compile Include="Models\Entities\Filter.cs" />
+    <Compile Include="Models\Entities\FilterCategories.cs" />
     <Compile Include="Models\Entities\FilterName.cs" />
+    <Compile Include="Models\Entities\FilterNameGroup.cs" />
+    <Compile Include="Models\Entities\FilterValue.cs" />
     <Compile Include="Models\Entities\ProductImage.cs" />
     <Compile Include="Models\Entities\ProductDescriptionImage.cs" />
     <Compile Include="Models\Entities\ProductMappingImages.cs" />
     <Compile Include="Models\Entities\ProductMetaData.cs" />
     <Compile Include="Models\Entities\UserProfile.cs" />
+    <Compile Include="Models\FiltersViewModels.cs" />
     <Compile Include="Models\HealperModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -520,6 +540,13 @@
     <Content Include="Views\Shared\_ProgressLoader.cshtml" />
     <Content Include="Views\Shared\_AddImages.cshtml" />
     <Content Include="Views\Products\_Create.cshtml" />
+    <Content Include="Views\FilterCategories\Create.cshtml" />
+    <Content Include="Views\FilterCategories\Delete.cshtml" />
+    <Content Include="Views\FilterCategories\Details.cshtml" />
+    <Content Include="Views\FilterCategories\Edit.cshtml" />
+    <Content Include="Views\FilterCategories\Index.cshtml" />
+    <Content Include="Views\FilterCategories\CreateFilterName.cshtml" />
+    <Content Include="Views\FilterCategories\CreateFilterValue.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -565,6 +592,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809241614373_Add tblProductDescriptionImages.resx">
       <DependentUpon>201809241614373_Add tblProductDescriptionImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809261554160_Filters table added..resx">
+      <DependentUpon>201809261554160_Filters table added..cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

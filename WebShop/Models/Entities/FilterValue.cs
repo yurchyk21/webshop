@@ -7,13 +7,13 @@ using System.Web;
 
 namespace WebShop.Models.Entities
 {
-    [Table("tblFilterName")]
-    public class FilterName
+    [Table("tblFilterValue")]
+    public class FilterValue
     {
         [Key]
         public int Id { get; set; }
         [StringLength(maximumLength: 258)]
-        [Display(Name = "FilterName")]
+        [Display(Name = "FilterValue")]
         public string Name { get; set; }
     }
 }

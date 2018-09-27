@@ -41,6 +41,12 @@ namespace WebShop.Models
         public DbSet<ProductMappingImage> ProductMappingImages { get; set; }
         public DbSet<ProductDescriptionImage> ProductDescriptionImages { get; set; }
 
+        public DbSet<FilterName> FiltersName { get; set; }
+        public DbSet<FilterValue> FiltersValue { get; set; }
+        public DbSet<FilterNameGroup> FilterNameGroups { get; set; }
+        public DbSet<Filter> Filters { get; set; }
+        public DbSet<FilterCategory> FilterCategories { get; set; }
+
         #endregion
     }
 
